@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "ingredient-game": {
+      "command": "node",
+      "args": ["mcp-server/dist/index.js"],
+      "env": {
+        "BACKEND_URL": "http://localhost:3002"
+      }
+    }
+  }
+}

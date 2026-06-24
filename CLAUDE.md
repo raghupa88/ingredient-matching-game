@@ -6,6 +6,7 @@
 npm install          # installs all workspaces
 npm run dev          # starts frontend (5173) + backend (3002)
 npm test             # runs all workspace tests
+npm run build:extension   # compiles the Copilot VS Code extension
 ```
 
 ## Ports
@@ -18,11 +19,56 @@ npm test             # runs all workspace tests
 
 ## Architecture
 
-- **npm workspaces** monorepo: `frontend/`, `backend/`, `mcp-server/`
-- **APM skills** live in `skills/` as pure CommonJS modules
-- **APM prompts** live in `prompts/` as Markdown templates with `{{variable}}` syntax
-- `apm.yml` declares all skills, prompts, hooks, middleware, and env vars
+- **npm workspaces** monorepo: `frontend/`, `backend/`, `mcp-server/`, `copilot-extension/`
+- **APM agents** declared in `apm.yml` — each is an AI model (Claude Code session or Copilot) with assigned MCP tools and a system prompt from `prompts/`
+- **APM skills** live in `skills/` as pure CommonJS modules — these are the tool *handlers* agents call
+- **APM prompts** live in `prompts/` as Markdown templates — used as agent `instructions`
+- `apm.yml` is the single source of truth for agents, skills, prompts, and MCP server
 - `backend/src/services/apmLoader.ts` resolves skill load order via topological sort
+- `.mcp.json` — project-level MCP config read by Claude Code to auto-discover the game MCP server
+- `copilot-extension/` — VS Code extension that reads `apm.yml` and registers each agent as a Copilot Chat participant
+
+## Agent Architecture (True APM)
+
+```
+apm.yml agents
+  └── Claude Code reads .mcp.json → discovers MCP server tools → acts as agent
+  └── Copilot Chat reads copilot-extension/ → @hint-agent, @game-agent, etc.
+
+Each agent:
+  type: claude                        ← AI is Claude Code session or Copilot
+  mcp_tools: [get_hint, ...]          ← which MCP tools it can call
+  instructions: ./prompts/hint.md     ← system prompt / persona
+  depends_on: [other-agent]           ← orchestration order
+```
+
+No separate `ANTHROPIC_API_KEY` needed — Claude Code or Copilot provides the LLM.
+
+## Claude Code MCP Setup
+
+`.mcp.json` at repo root is auto-read by Claude Code. After `npm run build --workspace=mcp-server`:
+```bash
+# Claude Code will discover ingredient-game MCP server automatically
+# You can then ask Claude Code to act as any agent:
+# "Act as hint-agent. Player has found rice and urad dal for Idli."
+```
+
+## Copilot Chat Agent Setup
+
+```bash
+npm run build:extension        # compile the extension
+# In VS Code: Extensions → Install from VSIX → copilot-extension/
+# Or press F5 in copilot-extension/ to launch Extension Development Host
+```
+
+Then in Copilot Chat:
+```
+@hint-agent give me a clue for the missing ingredient in Sambar
+@cultural-agent what is the significance of Pongal in Tamil Nadu?
+@game-agent start a new game on hard difficulty
+@scoring-agent I got rice, urad dal, and salt — how did I do on Idli?
+@difficulty-agent my last 3 scores were 80, 90, 75 — should I try easy?
+```
 
 ## APM Skill Load Order
 

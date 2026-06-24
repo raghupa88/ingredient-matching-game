@@ -5,11 +5,13 @@
   "workspaces": [
     "frontend",
     "backend",
-    "mcp-server"
+    "mcp-server",
+    "copilot-extension"
   ],
   "scripts": {
     "dev": "concurrently \"npm run dev --workspace=backend\" \"npm run dev --workspace=frontend\"",
     "build": "npm run build --workspace=backend && npm run build --workspace=frontend && npm run build --workspace=mcp-server",
+    "build:extension": "npm run compile --workspace=copilot-extension",
     "install:all": "npm install",
     "mcp": "npm run start --workspace=mcp-server",
     "test": "jest --testPathPattern=skills/__tests__ && npm run test --workspace=backend && npm run test --workspace=frontend",

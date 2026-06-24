@@ -1,0 +1,68 @@
+{
+  "name": "ingredient-game-agents",
+  "displayName": "Ingredient Game — APM Agents",
+  "description": "Copilot Chat agents for the Ingredient Matching Game, defined in apm.yml",
+  "version": "1.0.0",
+  "publisher": "raghupa88",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": ["AI", "Chat"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "chatParticipants": [
+      {
+        "id": "ingredient-game.hint-agent",
+        "name": "hint-agent",
+        "fullName": "Hint Agent",
+        "description": "Get a contextual clue for a missing ingredient without having it named",
+        "isSticky": false
+      },
+      {
+        "id": "ingredient-game.cultural-agent",
+        "name": "cultural-agent",
+        "fullName": "Cultural Agent",
+        "description": "Learn about Tamil and South Indian dish heritage and traditions",
+        "isSticky": false
+      },
+      {
+        "id": "ingredient-game.scoring-agent",
+        "name": "scoring-agent",
+        "fullName": "Scoring Agent",
+        "description": "Validate your answer and get personalised end-of-round feedback",
+        "isSticky": false
+      },
+      {
+        "id": "ingredient-game.difficulty-agent",
+        "name": "difficulty-agent",
+        "fullName": "Difficulty Agent",
+        "description": "Get a difficulty recommendation based on your recent performance",
+        "isSticky": false
+      },
+      {
+        "id": "ingredient-game.game-agent",
+        "name": "game-agent",
+        "fullName": "Game Agent",
+        "description": "Tamil food game master — start a session, pick a dish, or check the leaderboard",
+        "isSticky": true
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "tsc -p .",
+    "watch": "tsc -p . --watch",
+    "package": "vsce package",
+    "lint": "eslint src --ext ts"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.90.0",
+    "@vscode/vsce": "^2.24.0",
+    "typescript": "^5.3.3"
+  }
+}

@@ -81,3 +81,47 @@ resolvedMcpServers:
     path: ./mcp-server/src/index.ts
     hash: "sha256:placeholder-mcp-server"
     transport: stdio
+
+# Agent dependency graph — resolved load order for Claude Code / Copilot Chat
+# Agents without depends_on load first; orchestrators load last.
+resolvedAgents:
+  - name: hint-agent
+    resolvedOrder: 1
+    dependsOn: []
+    runtime: claude-code-or-copilot
+    mcpConfig: .mcp.json
+    participantId: ingredient-game.hint-agent
+
+  - name: cultural-agent
+    resolvedOrder: 2
+    dependsOn: []
+    runtime: claude-code-or-copilot
+    mcpConfig: .mcp.json
+    participantId: ingredient-game.cultural-agent
+
+  - name: scoring-agent
+    resolvedOrder: 3
+    dependsOn:
+      - hint-agent
+    runtime: claude-code-or-copilot
+    mcpConfig: .mcp.json
+    participantId: ingredient-game.scoring-agent
+
+  - name: difficulty-agent
+    resolvedOrder: 4
+    dependsOn:
+      - scoring-agent
+    runtime: claude-code-or-copilot
+    mcpConfig: .mcp.json
+    participantId: ingredient-game.difficulty-agent
+
+  - name: game-agent
+    resolvedOrder: 5
+    dependsOn:
+      - hint-agent
+      - scoring-agent
+      - cultural-agent
+      - difficulty-agent
+    runtime: claude-code-or-copilot
+    mcpConfig: .mcp.json
+    participantId: ingredient-game.game-agent

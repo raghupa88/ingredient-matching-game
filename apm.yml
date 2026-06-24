@@ -10,6 +10,77 @@ runtime:
   timeout: 5000
   retries: 2
 
+# ── Agents ─────────────────────────────────────────────────────────────────────
+# Each agent is an AI model (Claude Code session or Copilot) with assigned tools
+# and a system prompt. Tools reference MCP tool names from mcp_servers below.
+# Claude Code reads this via .mcp.json; Copilot reads via copilot-extension/.
+agents:
+  - name: hint-agent
+    type: claude
+    model: claude-sonnet-4-6
+    description: Gives contextual clues without naming the missing ingredient
+    mcp_tools:
+      - get_hint
+      - get_cultural_context
+      - get_dish_info
+    instructions: ./prompts/hint-generator.md
+
+  - name: cultural-agent
+    type: claude
+    model: claude-sonnet-4-6
+    description: Explains Tamil and South Indian dish heritage and traditions
+    mcp_tools:
+      - get_cultural_context
+      - get_dish_info
+      - list_dishes
+    instructions: ./prompts/cultural-context.md
+
+  - name: scoring-agent
+    type: claude
+    model: claude-sonnet-4-6
+    description: Validates answers and delivers warm end-of-round feedback
+    mcp_tools:
+      - validate_answer
+      - update_score
+      - get_leaderboard
+      - get_player_stats
+    instructions: ./prompts/feedback-generator.md
+    depends_on:
+      - hint-agent
+
+  - name: difficulty-agent
+    type: claude
+    model: claude-sonnet-4-6
+    description: Monitors player performance and recommends difficulty adjustments
+    mcp_tools:
+      - adjust_difficulty
+      - get_difficulty_recommendation
+      - get_player_stats
+    instructions: ./prompts/difficulty-advisor.md
+    depends_on:
+      - scoring-agent
+
+  - name: game-agent
+    type: claude
+    model: claude-sonnet-4-6
+    description: Orchestrates full game flow — start, rounds, hints, scoring, leaderboard
+    mcp_tools:
+      - start_game
+      - reset_game
+      - random_dish
+      - list_dishes
+      - get_leaderboard
+    instructions: |
+      You are a Tamil food game master for the Ingredient Matching Game.
+      Help players start sessions, pick dishes, navigate rounds, and celebrate their scores.
+      Prefer Tamil Nadu dishes when suggesting what to play next.
+      Respond warmly, as if you are a knowledgeable Tamil food enthusiast.
+    depends_on:
+      - hint-agent
+      - scoring-agent
+      - cultural-agent
+      - difficulty-agent
+
 # ── Skills ─────────────────────────────────────────────────────────────────────
 skills:
   - name: ingredient-matcher
