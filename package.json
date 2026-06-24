@@ -1,0 +1,26 @@
+{
+  "name": "ingredient-matching-game",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend",
+    "mcp-server"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace=backend\" \"npm run dev --workspace=frontend\"",
+    "build": "npm run build --workspace=backend && npm run build --workspace=frontend && npm run build --workspace=mcp-server",
+    "install:all": "npm install",
+    "mcp": "npm run start --workspace=mcp-server",
+    "test": "jest --testPathPattern=skills/__tests__ && npm run test --workspace=backend && npm run test --workspace=frontend",
+    "test:skills": "jest --testPathPattern=skills/__tests__"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": ["**/skills/__tests__/**/*.test.js"]
+  }
+}

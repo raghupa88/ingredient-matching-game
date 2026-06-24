@@ -1,0 +1,372 @@
+[
+  {
+    "id": "idli",
+    "name": "Idli",
+    "tamilName": "இட்லி",
+    "region": "Tamil Nadu",
+    "difficulty": "easy",
+    "funFact": "Idli is a steamed rice cake that has been eaten in Tamil Nadu for over 1000 years, traditionally served as breakfast with sambar and coconut chutney.",
+    "ingredients": ["rice batter", "urad dal", "salt", "water"],
+    "decoys": ["wheat flour", "maida", "egg", "milk", "butter", "sugar", "oil"]
+  },
+  {
+    "id": "dosa",
+    "name": "Dosa",
+    "tamilName": "தோசை",
+    "region": "Tamil Nadu",
+    "difficulty": "easy",
+    "funFact": "Dosa is a fermented crepe made from rice and lentils, a staple breakfast across Tamil Nadu and a UNESCO candidate for cultural heritage.",
+    "ingredients": ["rice", "urad dal", "fenugreek seeds", "oil", "salt"],
+    "decoys": ["wheat flour", "egg", "milk", "butter", "sugar", "maida", "semolina"]
+  },
+  {
+    "id": "sambar",
+    "name": "Sambar",
+    "tamilName": "சாம்பார்",
+    "region": "Tamil Nadu",
+    "difficulty": "medium",
+    "funFact": "Sambar is a lentil-based vegetable stew that is the soul of Tamil cuisine, served with idli, dosa, and rice at every meal.",
+    "ingredients": ["toor dal", "tamarind", "tomato", "drumstick", "onion", "sambar powder", "mustard seeds", "curry leaves"],
+    "decoys": ["coconut milk", "cream", "butter", "maida", "sugar", "vinegar", "soy sauce", "garam masala"]
+  },
+  {
+    "id": "rasam",
+    "name": "Rasam",
+    "tamilName": "ரசம்",
+    "region": "Tamil Nadu",
+    "difficulty": "medium",
+    "funFact": "Rasam is a thin, peppery tamarind soup traditionally consumed as a digestive aid. It is served in the middle of a Tamil meal to cleanse the palate.",
+    "ingredients": ["tamarind", "tomato", "black pepper", "cumin", "garlic", "curry leaves", "mustard seeds", "red chilli"],
+    "decoys": ["coconut", "toor dal", "cream", "garam masala", "cinnamon", "cardamom", "bay leaf", "cloves"]
+  },
+  {
+    "id": "pongal",
+    "name": "Pongal",
+    "tamilName": "பொங்கல்",
+    "region": "Tamil Nadu",
+    "difficulty": "easy",
+    "funFact": "Pongal is the most important Tamil harvest festival dish, cooked in a clay pot until it overflows — symbolising abundance and prosperity.",
+    "ingredients": ["rice", "moong dal", "ghee", "black pepper", "cumin", "ginger", "cashews", "curry leaves"],
+    "decoys": ["tamarind", "urad dal", "coconut", "sugar", "cardamom", "jaggery", "oil", "tomato"]
+  },
+  {
+    "id": "chettinad-chicken-curry",
+    "name": "Chettinad Chicken Curry",
+    "tamilName": "செட்டிநாடு கோழி குழம்பு",
+    "region": "Tamil Nadu",
+    "difficulty": "hard",
+    "funFact": "Chettinad cuisine from the Chettinad region uses rare spices like kalpasi (stone flower) and marathi mokku that are unique to this cooking tradition.",
+    "ingredients": ["chicken", "kalpasi", "marathi mokku", "star anise", "fennel seeds", "fresh coconut", "onion", "tomato", "ginger", "garlic"],
+    "decoys": ["butter", "cream", "cashew paste", "sugar", "vinegar", "bay leaf", "saffron", "rosewater", "mace", "nutmeg"]
+  },
+  {
+    "id": "puliyodarai",
+    "name": "Puliyodarai",
+    "tamilName": "புளியோதரை",
+    "region": "Tamil Nadu",
+    "difficulty": "medium",
+    "funFact": "Puliyodarai (tamarind rice) is a sacred temple food offered as prasad at Tamil Nadu temples, especially during Karthigai Deepam festival.",
+    "ingredients": ["cooked rice", "tamarind", "groundnuts", "mustard seeds", "curry leaves", "red chilli", "sesame oil", "chana dal"],
+    "decoys": ["coconut", "ghee", "sugar", "cardamom", "raisins", "cashews", "garam masala", "vinegar"]
+  },
+  {
+    "id": "kozhukattai",
+    "name": "Kozhukattai",
+    "tamilName": "கொழுக்கட்டை",
+    "region": "Tamil Nadu",
+    "difficulty": "medium",
+    "funFact": "Kozhukattai is a steamed rice dumpling offered to Lord Ganesha during the Vinayagar Chaturthi festival in Tamil Nadu.",
+    "ingredients": ["rice flour", "grated coconut", "jaggery", "cardamom", "ghee", "water", "sesame seeds"],
+    "decoys": ["urad dal", "sugar", "maida", "butter", "egg", "milk", "baking powder", "vanilla"]
+  },
+  {
+    "id": "murukku",
+    "name": "Murukku",
+    "tamilName": "முறுக்கு",
+    "region": "Tamil Nadu",
+    "difficulty": "easy",
+    "funFact": "Murukku is a crunchy spiral snack made during Diwali and Krishna Jayanthi in Tamil homes. The word 'murukku' means twisted in Tamil.",
+    "ingredients": ["rice flour", "urad dal flour", "butter", "cumin seeds", "sesame seeds", "salt", "water"],
+    "decoys": ["wheat flour", "egg", "sugar", "baking soda", "cardamom", "jaggery", "oil", "milk"]
+  },
+  {
+    "id": "paruppu-payasam",
+    "name": "Paruppu Payasam",
+    "tamilName": "பருப்பு பாயசம்",
+    "region": "Tamil Nadu",
+    "difficulty": "easy",
+    "funFact": "Paruppu Payasam is a moong dal kheer made with jaggery, an essential sweet dish served at Tamil weddings and auspicious occasions.",
+    "ingredients": ["moong dal", "jaggery", "coconut milk", "cardamom", "ghee", "cashews", "raisins"],
+    "decoys": ["sugar", "milk", "cream", "maida", "egg", "butter", "vanilla", "cornstarch"]
+  },
+  {
+    "id": "avial",
+    "name": "Avial",
+    "tamilName": "அவியல்",
+    "region": "Tamil Nadu",
+    "difficulty": "medium",
+    "funFact": "Avial is a mixed vegetable dish with coconut and yogurt, said to have been invented by Bhima of the Mahabharata when he worked as a cook.",
+    "ingredients": ["raw banana", "yam", "drumstick", "grated coconut", "yogurt", "cumin", "curry leaves", "coconut oil", "green chilli"],
+    "decoys": ["tamarind", "tomato", "onion", "garlic", "ginger", "mustard seeds", "ghee", "sambar powder"]
+  },
+  {
+    "id": "mor-kuzhambu",
+    "name": "Mor Kuzhambu",
+    "tamilName": "மோர் குழம்பு",
+    "region": "Tamil Nadu",
+    "difficulty": "medium",
+    "funFact": "Mor Kuzhambu is a buttermilk-based curry that is a staple summer food in Tamil Nadu, cooling the body in hot weather.",
+    "ingredients": ["buttermilk", "ash gourd", "grated coconut", "cumin", "green chilli", "turmeric", "curry leaves", "mustard seeds"],
+    "decoys": ["tamarind", "tomato", "toor dal", "sambar powder", "red chilli", "garlic", "onion", "ginger"]
+  },
+  {
+    "id": "vazhaipoo-vadai",
+    "name": "Vazhaipoo Vadai",
+    "tamilName": "வாழைப்பூ வடை",
+    "region": "Tamil Nadu",
+    "difficulty": "hard",
+    "funFact": "Vazhaipoo Vadai uses banana blossom, a highly nutritious flower that is a traditional Tamil ingredient with medicinal properties.",
+    "ingredients": ["banana blossom", "chana dal", "onion", "red chilli", "fennel seeds", "curry leaves", "ginger", "salt", "oil"],
+    "decoys": ["urad dal", "rice flour", "coconut", "tamarind", "mustard seeds", "turmeric", "jaggery", "cardamom"]
+  },
+  {
+    "id": "sundal",
+    "name": "Sundal",
+    "tamilName": "சுண்டல்",
+    "region": "Tamil Nadu",
+    "difficulty": "easy",
+    "funFact": "Sundal is a boiled legume dish offered as prasad during the Navaratri festival, with a different legume made each of the nine days.",
+    "ingredients": ["chickpeas", "grated coconut", "mustard seeds", "curry leaves", "red chilli", "lemon juice", "salt"],
+    "decoys": ["tamarind", "tomato", "onion", "garlic", "ginger", "sambar powder", "sugar", "ghee"]
+  },
+  {
+    "id": "thayir-sadam",
+    "name": "Thayir Sadam",
+    "tamilName": "தயிர் சாதம்",
+    "region": "Tamil Nadu",
+    "difficulty": "easy",
+    "funFact": "Curd rice is the final course of a traditional Tamil meal and is considered sacred — it is said to cool the body, mind, and soul.",
+    "ingredients": ["cooked rice", "yogurt", "milk", "ginger", "curry leaves", "mustard seeds", "pomegranate", "salt"],
+    "decoys": ["tamarind", "ghee", "onion", "tomato", "red chilli", "sugar", "cardamom", "jaggery"]
+  },
+  {
+    "id": "kothu-parotta",
+    "name": "Kothu Parotta",
+    "tamilName": "கொத்து பரோட்டா",
+    "region": "Tamil Nadu",
+    "difficulty": "medium",
+    "funFact": "Kothu Parotta is a street food icon of Tamil Nadu — shredded flaky flatbread stir-fried on a hot griddle with egg and spicy gravy.",
+    "ingredients": ["parotta", "egg", "onion", "tomato", "green chilli", "curry leaves", "salna", "ginger garlic paste"],
+    "decoys": ["coconut milk", "tamarind", "mustard seeds", "ghee", "rice flour", "jaggery", "urad dal", "cardamom"]
+  },
+  {
+    "id": "keerai-masiyal",
+    "name": "Keerai Masiyal",
+    "tamilName": "கீரை மசியல்",
+    "region": "Tamil Nadu",
+    "difficulty": "easy",
+    "funFact": "Keerai Masiyal is a mashed spinach dish that has been a part of the Tamil diet for centuries, eaten with rice and ghee.",
+    "ingredients": ["spinach", "garlic", "cumin", "red chilli", "toor dal", "salt", "water"],
+    "decoys": ["coconut", "tamarind", "mustard seeds", "ghee", "onion", "tomato", "cardamom", "sugar"]
+  },
+  {
+    "id": "nei-choru",
+    "name": "Nei Choru",
+    "tamilName": "நெய் சோறு",
+    "region": "Tamil Nadu",
+    "difficulty": "medium",
+    "funFact": "Nei Choru (ghee rice) is a festive rice dish from Tamil Nadu often served at weddings and temple festivals with kurma or salna.",
+    "ingredients": ["basmati rice", "ghee", "cashews", "raisins", "bay leaf", "cinnamon", "cardamom", "cloves", "onion"],
+    "decoys": ["coconut milk", "tamarind", "urad dal", "mustard seeds", "curry leaves", "jaggery", "chilli powder", "tomato"]
+  },
+  {
+    "id": "thakkali-sadam",
+    "name": "Thakkali Sadam",
+    "tamilName": "தக்காளி சாதம்",
+    "region": "Tamil Nadu",
+    "difficulty": "easy",
+    "funFact": "Thakkali Sadam is a tangy tomato rice loved by Tamil school children as a tiffin box staple and a quick weekday lunch.",
+    "ingredients": ["cooked rice", "tomato", "onion", "mustard seeds", "curry leaves", "green chilli", "ghee", "turmeric"],
+    "decoys": ["tamarind", "coconut", "urad dal", "cardamom", "jaggery", "cream", "vinegar", "sugar"]
+  },
+  {
+    "id": "kadala-curry",
+    "name": "Kadala Curry",
+    "tamilName": "கடலை கறி",
+    "region": "Tamil Nadu",
+    "difficulty": "medium",
+    "funFact": "Black chickpea curry cooked in Kerala-Tamil style with roasted coconut gravy, traditionally served with puttu on Sunday mornings.",
+    "ingredients": ["black chickpeas", "coconut", "onion", "ginger", "garlic", "red chilli", "coriander powder", "coconut oil"],
+    "decoys": ["tamarind", "toor dal", "mustard seeds", "ghee", "cardamom", "sugar", "cream", "bay leaf"]
+  },
+  {
+    "id": "hyderabadi-biryani",
+    "name": "Hyderabadi Biryani",
+    "tamilName": "ஹைதராபாத் பிரியாணி",
+    "region": "Andhra Pradesh",
+    "difficulty": "hard",
+    "funFact": "Hyderabadi Biryani uses the dum cooking technique where meat and rice are slow-cooked together in a sealed vessel over charcoal.",
+    "ingredients": ["basmati rice", "mutton", "saffron", "fried onions", "yogurt", "garam masala", "mint leaves", "ghee", "rose water"],
+    "decoys": ["coconut milk", "tamarind", "curry leaves", "mustard seeds", "urad dal", "jaggery", "red chilli powder", "fenugreek"]
+  },
+  {
+    "id": "kerala-fish-curry",
+    "name": "Kerala Fish Curry",
+    "tamilName": "கேரள மீன் குழம்பு",
+    "region": "Kerala",
+    "difficulty": "medium",
+    "funFact": "Kerala Fish Curry is made with kudampuli (Gambooge) giving it a unique sour flavour unlike any other Indian fish curry.",
+    "ingredients": ["fish", "kudampuli", "coconut milk", "red chilli", "ginger", "garlic", "mustard seeds", "curry leaves", "coconut oil"],
+    "decoys": ["tamarind", "tomato", "toor dal", "ghee", "cardamom", "cinnamon", "bay leaf", "cream"]
+  },
+  {
+    "id": "pesarattu",
+    "name": "Pesarattu",
+    "tamilName": "பேசரட்டு",
+    "region": "Andhra Pradesh",
+    "difficulty": "easy",
+    "funFact": "Pesarattu is a green moong dal crepe from Andhra, a protein-rich breakfast served with allam (ginger) chutney.",
+    "ingredients": ["green moong dal", "rice", "ginger", "green chilli", "cumin", "onion", "salt", "oil"],
+    "decoys": ["urad dal", "tamarind", "coconut", "jaggery", "cardamom", "ghee", "toor dal", "mustard seeds"]
+  },
+  {
+    "id": "bisi-bele-bath",
+    "name": "Bisi Bele Bath",
+    "tamilName": "பிசி பேளே பாத்",
+    "region": "Karnataka",
+    "difficulty": "hard",
+    "funFact": "Bisi Bele Bath (hot lentil rice) is a one-pot comfort meal from Karnataka featuring a special spice powder blend unique to the dish.",
+    "ingredients": ["rice", "toor dal", "mixed vegetables", "tamarind", "bisi bele bath powder", "ghee", "cashews", "mustard seeds"],
+    "decoys": ["coconut milk", "urad dal", "jaggery", "cardamom", "cream", "bay leaf", "garam masala", "sugar"]
+  },
+  {
+    "id": "butter-chicken",
+    "name": "Butter Chicken",
+    "tamilName": "வெண்ணெய் கோழி",
+    "region": "Punjab",
+    "difficulty": "medium",
+    "funFact": "Butter Chicken (Murgh Makhani) was invented accidentally in Delhi in the 1950s by mixing leftover tandoori chicken in tomato cream sauce.",
+    "ingredients": ["chicken", "butter", "tomato puree", "cream", "onion", "ginger", "garlic", "garam masala", "kasuri methi"],
+    "decoys": ["coconut milk", "tamarind", "mustard seeds", "curry leaves", "urad dal", "jaggery", "fennel", "kalpasi"]
+  },
+  {
+    "id": "dal-makhani",
+    "name": "Dal Makhani",
+    "tamilName": "டால் மக்கனி",
+    "region": "Punjab",
+    "difficulty": "medium",
+    "funFact": "Dal Makhani is slow-cooked overnight on a tandoor, giving it a rich creamy texture. It is one of India's most iconic restaurant dishes.",
+    "ingredients": ["black lentils", "kidney beans", "butter", "cream", "tomato", "onion", "ginger", "garlic", "garam masala"],
+    "decoys": ["coconut milk", "tamarind", "mustard seeds", "curry leaves", "jaggery", "cardamom", "ghee", "toor dal"]
+  },
+  {
+    "id": "palak-paneer",
+    "name": "Palak Paneer",
+    "tamilName": "பாலக் பனீர்",
+    "region": "North India",
+    "difficulty": "easy",
+    "funFact": "Palak Paneer is a creamy spinach curry with fresh cheese, one of the most internationally recognised Indian vegetarian dishes.",
+    "ingredients": ["spinach", "paneer", "onion", "tomato", "ginger", "garlic", "cream", "garam masala", "cumin"],
+    "decoys": ["coconut milk", "tamarind", "mustard seeds", "curry leaves", "jaggery", "urad dal", "cardamom", "fenugreek seeds"]
+  },
+  {
+    "id": "pizza-margherita",
+    "name": "Pizza Margherita",
+    "tamilName": "பிட்சா மார்கரிட்டா",
+    "region": "Italy",
+    "difficulty": "easy",
+    "funFact": "Pizza Margherita was created in 1889 in Naples for Queen Margherita of Italy, with toppings in the colours of the Italian flag.",
+    "ingredients": ["pizza dough", "tomato sauce", "mozzarella", "fresh basil", "olive oil", "salt"],
+    "decoys": ["cheddar", "pepperoni", "mushrooms", "bell pepper", "cream", "oregano", "vinegar", "sugar"]
+  },
+  {
+    "id": "sushi-nigiri",
+    "name": "Sushi Nigiri",
+    "tamilName": "சுஷி நிகிரி",
+    "region": "Japan",
+    "difficulty": "medium",
+    "funFact": "Nigiri sushi originated in Tokyo (then Edo) in the early 19th century as a fast street food served from outdoor stalls.",
+    "ingredients": ["sushi rice", "fresh salmon", "rice vinegar", "wasabi", "nori", "soy sauce", "sugar", "salt"],
+    "decoys": ["cream cheese", "avocado", "mayo", "sriracha", "butter", "ginger pickle", "sesame oil", "miso"]
+  },
+  {
+    "id": "pad-thai",
+    "name": "Pad Thai",
+    "tamilName": "பாட் தாய்",
+    "region": "Thailand",
+    "difficulty": "medium",
+    "funFact": "Pad Thai was promoted by the Thai government in the 1930s as a national dish to encourage rice noodle consumption and build national identity.",
+    "ingredients": ["rice noodles", "shrimp", "egg", "bean sprouts", "tofu", "fish sauce", "tamarind paste", "peanuts", "lime"],
+    "decoys": ["coconut milk", "soy sauce", "rice", "basil", "curry paste", "lemongrass", "galangal", "kaffir lime leaves"]
+  },
+  {
+    "id": "chocolate-mousse",
+    "name": "Chocolate Mousse",
+    "tamilName": "சாக்லேட் மூஸ்",
+    "region": "France",
+    "difficulty": "easy",
+    "funFact": "Chocolate mousse was first introduced in France in the 1750s and means 'foam' in French, referring to its light airy texture.",
+    "ingredients": ["dark chocolate", "eggs", "heavy cream", "sugar", "butter", "vanilla extract"],
+    "decoys": ["flour", "baking powder", "milk", "cocoa powder", "cream cheese", "gelatin", "honey", "salt"]
+  },
+  {
+    "id": "chicken-65",
+    "name": "Chicken 65",
+    "tamilName": "சிக்கன் 65",
+    "region": "Tamil Nadu",
+    "difficulty": "medium",
+    "funFact": "Chicken 65 was invented at Hotel Buhari in Chennai in 1965. It is one of the most popular Tamil Nadu starters, served as a bar snack and party appetizer.",
+    "ingredients": ["chicken", "red chilli powder", "ginger garlic paste", "yogurt", "curry leaves", "lemon juice", "egg", "corn flour", "oil"],
+    "decoys": ["coconut milk", "tamarind", "mustard seeds", "jaggery", "cardamom", "cream", "saffron", "sugar"]
+  },
+  {
+    "id": "filter-coffee",
+    "name": "Filter Coffee",
+    "tamilName": "ஃபில்டர் காபி",
+    "region": "Tamil Nadu",
+    "difficulty": "easy",
+    "funFact": "South Indian filter coffee brewed in a traditional brass filter is a ritual in Tamil homes — served frothy in a davara-tumbler set.",
+    "ingredients": ["coffee powder", "chicory", "whole milk", "sugar", "hot water"],
+    "decoys": ["cream", "cardamom", "cinnamon", "vanilla", "butter", "cocoa", "condensed milk", "honey"]
+  },
+  {
+    "id": "appam",
+    "name": "Appam",
+    "tamilName": "ஆப்பம்",
+    "region": "Tamil Nadu",
+    "difficulty": "easy",
+    "funFact": "Appam is a lacy, bowl-shaped rice pancake made from fermented batter, traditionally paired with coconut milk or vegetable stew.",
+    "ingredients": ["raw rice", "coconut", "coconut water", "yeast", "salt", "sugar"],
+    "decoys": ["urad dal", "maida", "wheat flour", "egg", "butter", "ghee", "milk", "tamarind"]
+  },
+  {
+    "id": "chettinad-egg-curry",
+    "name": "Chettinad Egg Curry",
+    "tamilName": "செட்டிநாடு முட்டை குழம்பு",
+    "region": "Tamil Nadu",
+    "difficulty": "medium",
+    "funFact": "Chettinad Egg Curry uses a bold spice blend from the Chettinad region including kalpasi and dried red chillies for an intense flavour.",
+    "ingredients": ["boiled eggs", "onion", "tomato", "kalpasi", "fennel seeds", "black pepper", "coconut", "red chilli", "ginger garlic paste"],
+    "decoys": ["cream", "butter", "cardamom", "sugar", "vinegar", "bay leaf", "saffron", "rose water"]
+  },
+  {
+    "id": "tapioca-coconut",
+    "name": "Kappa Biryani",
+    "tamilName": "கப்பா பிரியாணி",
+    "region": "Tamil Nadu",
+    "difficulty": "hard",
+    "funFact": "Kappa Biryani is a unique Tamil-Kerala fusion dish of tapioca mixed with spiced beef or fish curry, popular in border belt districts.",
+    "ingredients": ["tapioca", "fish", "coconut", "red chilli", "turmeric", "mustard seeds", "curry leaves", "garlic", "shallots"],
+    "decoys": ["rice", "ghee", "cardamom", "saffron", "bay leaf", "sugar", "jaggery", "cream"]
+  },
+  {
+    "id": "vada-curry",
+    "name": "Vada Curry",
+    "tamilName": "வடை கறி",
+    "region": "Tamil Nadu",
+    "difficulty": "medium",
+    "funFact": "Vada Curry is a Chennai invention — crumbled chana dal vadas simmered in a spicy onion-tomato gravy, served exclusively with parotta or idiyappam.",
+    "ingredients": ["chana dal vada", "onion", "tomato", "coconut", "red chilli powder", "ginger", "garlic", "curry leaves", "turmeric"],
+    "decoys": ["urad dal", "tamarind", "mustard seeds", "ghee", "cardamom", "sugar", "cream", "fennel seeds"]
+  }
+]

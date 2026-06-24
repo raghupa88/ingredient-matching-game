@@ -1,0 +1,83 @@
+# apm-lock.yml — Resolved dependency graph (auto-generated, do not edit manually)
+# Generated: 2024-01-01T00:00:00.000Z
+# APM version: 1.0.0
+
+lockfileVersion: 1
+
+resolvedSkills:
+  - name: ingredient-matcher
+    version: "1.0.0"
+    path: ./skills/ingredient-matcher.js
+    hash: "sha256:placeholder-ingredient-matcher"
+    resolvedOrder: 1
+    dependsOn: []
+
+  - name: score-calculator
+    version: "1.0.0"
+    path: ./skills/score-calculator.js
+    hash: "sha256:placeholder-score-calculator"
+    resolvedOrder: 2
+    dependsOn: []
+
+  - name: cultural-tagger
+    version: "1.0.0"
+    path: ./skills/cultural-tagger.js
+    hash: "sha256:placeholder-cultural-tagger"
+    resolvedOrder: 3
+    dependsOn: []
+
+  - name: dish-randomizer
+    version: "1.0.0"
+    path: ./skills/dish-randomizer.js
+    hash: "sha256:placeholder-dish-randomizer"
+    resolvedOrder: 4
+    dependsOn: []
+
+  - name: game-validator
+    version: "1.0.0"
+    path: ./skills/game-validator.js
+    hash: "sha256:placeholder-game-validator"
+    resolvedOrder: 5
+    dependsOn:
+      - ingredient-matcher
+
+  - name: difficulty-scaler
+    version: "1.0.0"
+    path: ./skills/difficulty-scaler.js
+    hash: "sha256:placeholder-difficulty-scaler"
+    resolvedOrder: 6
+    dependsOn:
+      - score-calculator
+
+resolvedPrompts:
+  - name: hint-generator
+    version: "1.0.0"
+    path: ./prompts/hint-generator.md
+    hash: "sha256:placeholder-hint-generator"
+
+  - name: dish-guesser
+    version: "1.0.0"
+    path: ./prompts/dish-guesser.md
+    hash: "sha256:placeholder-dish-guesser"
+
+  - name: cultural-context
+    version: "1.0.0"
+    path: ./prompts/cultural-context.md
+    hash: "sha256:placeholder-cultural-context"
+
+  - name: difficulty-advisor
+    version: "1.0.0"
+    path: ./prompts/difficulty-advisor.md
+    hash: "sha256:placeholder-difficulty-advisor"
+
+  - name: feedback-generator
+    version: "1.0.0"
+    path: ./prompts/feedback-generator.md
+    hash: "sha256:placeholder-feedback-generator"
+
+resolvedMcpServers:
+  - name: game-state-server
+    version: "1.0.0"
+    path: ./mcp-server/src/index.ts
+    hash: "sha256:placeholder-mcp-server"
+    transport: stdio
