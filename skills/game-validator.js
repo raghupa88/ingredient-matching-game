@@ -5,29 +5,32 @@ const { fuzzyMatch, normalizeIngredient } = require('./ingredient-matcher');
 const FUZZY_THRESHOLD = 0.8;
 
 function validateIngredients(selected, correct) {
+  // Normalize for comparison only — keep originals for display in misses/extras
   const normCorrect = correct.map(normalizeIngredient);
   const normSelected = selected.map(normalizeIngredient);
 
   const matched = [];
-  const misses = [];
-  const extras = [];
+  const misses = [];   // original names from correct[] that weren't matched
+  const extras = [];   // original names from selected[] that aren't in correct[]
 
-  for (const c of normCorrect) {
-    const exact = normSelected.includes(c);
-    if (exact) {
-      matched.push(c);
+  for (let i = 0; i < correct.length; i++) {
+    const nc = normCorrect[i];
+    const exactIdx = normSelected.indexOf(nc);
+    if (exactIdx !== -1) {
+      matched.push(correct[i]);
     } else {
-      const { confidence } = fuzzyMatch(c, normSelected);
-      if (confidence >= FUZZY_THRESHOLD) matched.push(c);
-      else misses.push(c);
+      const { confidence } = fuzzyMatch(nc, normSelected);
+      if (confidence >= FUZZY_THRESHOLD) matched.push(correct[i]);
+      else misses.push(correct[i]); // original display name
     }
   }
 
-  for (const s of normSelected) {
-    const exact = normCorrect.includes(s);
-    if (!exact) {
-      const { confidence } = fuzzyMatch(s, normCorrect);
-      if (confidence < FUZZY_THRESHOLD) extras.push(s);
+  for (let i = 0; i < selected.length; i++) {
+    const ns = normSelected[i];
+    const exactIdx = normCorrect.indexOf(ns);
+    if (exactIdx === -1) {
+      const { confidence } = fuzzyMatch(ns, normCorrect);
+      if (confidence < FUZZY_THRESHOLD) extras.push(selected[i]); // original display name
     }
   }
 
