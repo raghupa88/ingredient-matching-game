@@ -73,7 +73,10 @@ export function startRound(sessionId: string): Round {
   session.usedDishIds.push(dish.id);
 
   const tiles = apmLoader.invokeSkill('difficulty-scaler', 'scaleTiles', dish, session.difficulty) as Tile[];
-  const decoys = (dish.decoys ?? []).slice(0, 3);
+
+  // correctIngredients must be only the ones present in the tile set —
+  // scaleTiles may slice to fewer than dish.ingredients.length on easy/medium
+  const correctIngredients = tiles.filter(t => t.isCorrect).map(t => t.name);
 
   const round: Round = {
     roundId: uuidv4(),
@@ -85,8 +88,8 @@ export function startRound(sessionId: string): Round {
     mode: session.mode,
     difficulty: session.difficulty,
     tiles,
-    ingredientList: shuffle([...dish.ingredients, ...decoys]),
-    correctIngredients: dish.ingredients,
+    ingredientList: shuffle(tiles.map(t => t.name)),
+    correctIngredients,
   };
 
   session.currentRound = round;
