@@ -1,19 +1,17 @@
+# ── Runtime configuration ──────────────────────────────────────────────────────
+# ── Agents ─────────────────────────────────────────────────────────────────────
+# Each agent is an AI model (Claude Code session or Copilot) with assigned tools
+# and a system prompt. Tools reference MCP tool names from mcp_servers below.
+# Claude Code reads this via .mcp.json; Copilot reads via copilot-extension/.
 name: ingredient-matching-game
 version: 1.0.0
 description: Tamil-first ingredient puzzle game with full APM integration
 author: Raghupathy
 license: MIT
-
-# ── Runtime configuration ──────────────────────────────────────────────────────
 runtime:
   node: ">=18.0.0"
   timeout: 5000
   retries: 2
-
-# ── Agents ─────────────────────────────────────────────────────────────────────
-# Each agent is an AI model (Claude Code session or Copilot) with assigned tools
-# and a system prompt. Tools reference MCP tool names from mcp_servers below.
-# Claude Code reads this via .mcp.json; Copilot reads via copilot-extension/.
 agents:
   - name: hint-agent
     type: claude
@@ -24,7 +22,6 @@ agents:
       - get_cultural_context
       - get_dish_info
     instructions: ./prompts/hint-generator.md
-
   - name: cultural-agent
     type: claude
     model: claude-sonnet-4-6
@@ -34,7 +31,6 @@ agents:
       - get_dish_info
       - list_dishes
     instructions: ./prompts/cultural-context.md
-
   - name: scoring-agent
     type: claude
     model: claude-sonnet-4-6
@@ -47,7 +43,6 @@ agents:
     instructions: ./prompts/feedback-generator.md
     depends_on:
       - hint-agent
-
   - name: difficulty-agent
     type: claude
     model: claude-sonnet-4-6
@@ -59,7 +54,6 @@ agents:
     instructions: ./prompts/difficulty-advisor.md
     depends_on:
       - scoring-agent
-
   - name: game-agent
     type: claude
     model: claude-sonnet-4-6
@@ -92,11 +86,9 @@ agents:
     instructions: ./prompts/discord-agent.md
     depends_on:
       - scoring-agent
-
-# ── Skills ─────────────────────────────────────────────────────────────────────
 skills:
   - name: ingredient-matcher
-    version: "1.0.0"
+    version: 1.0.0
     path: ./skills/ingredient-matcher.js
     description: Fuzzy and exact ingredient/dish-name matching using Levenshtein distance
     exports:
@@ -104,18 +96,16 @@ skills:
       - exactMatch
       - normalizeIngredient
     depends_on: []
-
   - name: score-calculator
-    version: "1.0.0"
+    version: 1.0.0
     path: ./skills/score-calculator.js
     description: Computes round score with time bonus, difficulty multiplier, and hint penalties
     exports:
       - calculateScore
       - applyPenalty
     depends_on: []
-
   - name: game-validator
-    version: "1.0.0"
+    version: 1.0.0
     path: ./skills/game-validator.js
     description: Validates ingredient tile selections and dish name guesses against correct answers
     exports:
@@ -123,9 +113,8 @@ skills:
       - validateDishName
     depends_on:
       - ingredient-matcher
-
   - name: difficulty-scaler
-    version: "1.0.0"
+    version: 1.0.0
     path: ./skills/difficulty-scaler.js
     description: Dynamically adjusts tile count, decoy quality, and recommends difficulty changes
     exports:
@@ -134,18 +123,16 @@ skills:
       - recommendDifficulty
     depends_on:
       - score-calculator
-
   - name: dish-randomizer
-    version: "1.0.0"
+    version: 1.0.0
     path: ./skills/dish-randomizer.js
     description: Selects rounds without repetition, weighted 3x toward Tamil dishes
     exports:
       - pickRound
       - resetHistory
     depends_on: []
-
   - name: cultural-tagger
-    version: "1.0.0"
+    version: 1.0.0
     path: ./skills/cultural-tagger.js
     description: Returns cultural region, Tamil script name, and fun fact for a dish
     exports:
@@ -153,11 +140,9 @@ skills:
       - getTamilName
       - getFunFact
     depends_on: []
-
-# ── Prompts ────────────────────────────────────────────────────────────────────
 prompts:
   - name: hint-generator
-    version: "1.0.0"
+    version: 1.0.0
     path: ./prompts/hint-generator.md
     description: One-line ingredient hint without naming the ingredient directly
     variables:
@@ -166,36 +151,32 @@ prompts:
       - region
       - found_ingredients
       - missing_count
-
   - name: dish-guesser
-    version: "1.0.0"
+    version: 1.0.0
     path: ./prompts/dish-guesser.md
     description: Dish-name clue based on ingredient list without revealing the answer
     variables:
       - ingredients
       - player_guess
       - difficulty
-
   - name: cultural-context
-    version: "1.0.0"
+    version: 1.0.0
     path: ./prompts/cultural-context.md
     description: 2-3 sentence cultural background for a Tamil or Indian dish
     variables:
       - dish_name
       - tamil_name
       - region
-
   - name: difficulty-advisor
-    version: "1.0.0"
+    version: 1.0.0
     path: ./prompts/difficulty-advisor.md
     description: Recommends difficulty adjustment based on recent performance
     variables:
       - recent_scores
       - current_difficulty
       - rounds_played
-
   - name: feedback-generator
-    version: "1.0.0"
+    version: 1.0.0
     path: ./prompts/feedback-generator.md
     description: Warm end-of-round feedback in Tamil grandmother style
     variables:
@@ -203,11 +184,9 @@ prompts:
       - score
       - time_remaining
       - mistakes
-
-# ── MCP Servers ────────────────────────────────────────────────────────────────
 mcp_servers:
   - name: game-state-server
-    version: "1.0.0"
+    version: 1.0.0
     path: ./mcp-server/src/index.ts
     description: Full game state, scoring, leaderboard, and dish catalog management
     transport: stdio
@@ -226,12 +205,10 @@ mcp_servers:
       - adjust_difficulty
       - get_difficulty_recommendation
     resources:
-      - "game://session/{id}"
-      - "game://leaderboard"
-      - "game://dishes"
-      - "game://stats/{playerId}"
-
-# ── Hooks ──────────────────────────────────────────────────────────────────────
+      - game://session/{id}
+      - game://leaderboard
+      - game://dishes
+      - game://stats/{playerId}
 hooks:
   pre_skill:
     - name: validate-input
@@ -249,8 +226,6 @@ hooks:
     - name: cache-response
       prompt: hint-generator
       description: Cache hint response keyed by (sessionId, roundIndex) for 60 seconds
-
-# ── Middleware ─────────────────────────────────────────────────────────────────
 middleware:
   - name: rate-limiter
     type: request
@@ -261,8 +236,6 @@ middleware:
   - name: response-formatter
     type: response
     description: Wrap all skill and prompt outputs in { success, data, meta } envelope
-
-# ── Environment ────────────────────────────────────────────────────────────────
 env:
   BACKEND_PORT: 3002
   MCP_SERVER_PATH: ./mcp-server/src/index.ts
