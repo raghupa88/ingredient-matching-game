@@ -81,6 +81,18 @@ agents:
       - cultural-agent
       - difficulty-agent
 
+  - name: discord-agent
+    type: claude
+    model: claude-sonnet-4-6
+    description: Posts game events to Discord — scores, high scores, perfect rounds
+    mcp_tools:
+      - discord_send
+      - discord_list_servers
+      - discord_get_server_info
+    instructions: ./prompts/discord-agent.md
+    depends_on:
+      - scoring-agent
+
 # ── Skills ─────────────────────────────────────────────────────────────────────
 skills:
   - name: ingredient-matcher

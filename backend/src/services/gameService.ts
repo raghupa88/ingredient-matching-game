@@ -97,6 +97,7 @@ export function startRound(sessionId: string): Round {
 export function validateAnswer(sessionId: string, answer: string | string[], timeRemaining: number): {
   isCorrect: boolean; scoreGained: number; totalScore: number; roundsPlayed: number;
   partialRatio: number; feedback: string; misses: string[]; extras: string[];
+  dishName: string; playerId: string;
 } {
   const session = getSession(sessionId);
   const round = session.currentRound;
@@ -141,7 +142,7 @@ export function validateAnswer(sessionId: string, answer: string | string[], tim
   sessions.set(sessionId, session);
 
   const feedback = isCorrect ? '✓ Correct!' : partialRatio > 0.5 ? 'Close! Partial credit awarded.' : '✗ Not quite!';
-  return { isCorrect, scoreGained, totalScore: session.score, roundsPlayed: session.roundsPlayed, partialRatio, feedback, misses, extras };
+  return { isCorrect, scoreGained, totalScore: session.score, roundsPlayed: session.roundsPlayed, partialRatio, feedback, misses, extras, dishName: round.dishName, playerId: session.playerId };
 }
 
 export function useHint(sessionId: string): { hintsUsed: number } {
@@ -172,13 +173,15 @@ export function resetSession(sessionId: string): void {
 
 const leaderboard: { playerId: string; score: number; timestamp: string }[] = [];
 
-export function submitScore(sessionId: string): typeof leaderboard {
+export function submitScore(sessionId: string): { leaderboard: typeof leaderboard; playerId: string; score: number } {
   const session = getSession(sessionId);
-  const entry = { playerId: session.playerId.slice(0, 50), score: session.score, timestamp: new Date().toISOString() };
+  const playerId = session.playerId.slice(0, 50);
+  const { score } = session;
+  const entry = { playerId, score, timestamp: new Date().toISOString() };
   leaderboard.push(entry);
   leaderboard.sort((a, b) => b.score - a.score);
   if (leaderboard.length > 10) leaderboard.length = 10;
-  return leaderboard;
+  return { leaderboard, playerId, score };
 }
 
 export function getLeaderboard() { return leaderboard; }

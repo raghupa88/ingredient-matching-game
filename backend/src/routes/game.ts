@@ -1,5 +1,6 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import * as gameService from '../services/gameService';
+import { discord } from '../services/discordService';
 
 export const gameRouter = Router();
 
@@ -33,6 +34,10 @@ gameRouter.post('/validate', (req: Request, res: Response, next: NextFunction) =
     if (!sessionId) return next(Object.assign(new Error('sessionId required'), { status: 400 }));
     if (answer === undefined || answer === null) return next(Object.assign(new Error('answer required'), { status: 400 }));
     const result = gameService.validateAnswer(String(sessionId), answer, Number(timeRemaining) || 0);
+    // Notify Discord on a perfect round (all ingredients correct)
+    if (result.isCorrect && result.partialRatio >= 1) {
+      discord.notifyPerfectRound(result.playerId, result.dishName, result.scoreGained).catch(() => {});
+    }
     res.json({ success: true, data: result });
   } catch (e) { next(e); }
 });
@@ -47,11 +52,18 @@ gameRouter.post('/reset', (req: Request, res: Response, next: NextFunction) => {
 });
 
 // Submit score using the server-tracked session score (not client-supplied)
-gameRouter.post('/scores', (req: Request, res: Response, next: NextFunction) => {
+gameRouter.post('/scores', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { sessionId } = req.body;
     if (!sessionId) return next(Object.assign(new Error('sessionId required'), { status: 400 }));
-    const leaderboard = gameService.submitScore(String(sessionId));
+    const { leaderboard, playerId, score } = gameService.submitScore(String(sessionId));
+    const rank = leaderboard.findIndex((e: { playerId: string }) => e.playerId === playerId) + 1;
+    // Fire-and-forget Discord notifications — never block the response
+    const prevHighScore = leaderboard.length > 1 ? leaderboard[1]?.score ?? 0 : 0;
+    discord.notifyScoreSubmitted(playerId, score, rank).catch(() => {});
+    if (rank === 1 && score > prevHighScore) {
+      discord.notifyHighScore(playerId, score).catch(() => {});
+    }
     res.json({ success: true, data: { leaderboard } });
   } catch (e) { next(e); }
 });

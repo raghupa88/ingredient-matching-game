@@ -27,6 +27,8 @@ npm run build:extension   # compiles the Copilot VS Code extension
 - `backend/src/services/apmLoader.ts` resolves skill load order via topological sort
 - `.mcp.json` — project-level MCP config read by Claude Code to auto-discover the game MCP server
 - `copilot-extension/` — VS Code extension that reads `apm.yml` and registers each agent as a Copilot Chat participant
+- `backend/src/services/discordService.ts` — webhook-based Discord notifications (score, high score, perfect round); fire-and-forget, never blocks the HTTP response
+- `.mcp.json` also includes `mcp-discord` server so Claude Code's `discord-agent` can call `discord_send` directly
 
 ## Agent Architecture (True APM)
 

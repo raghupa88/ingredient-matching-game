@@ -125,3 +125,12 @@ resolvedAgents:
     runtime: claude-code-or-copilot
     mcpConfig: .mcp.json
     participantId: ingredient-game.game-agent
+
+  - name: discord-agent
+    resolvedOrder: 6
+    dependsOn:
+      - scoring-agent
+    runtime: claude-code-or-copilot
+    mcpConfig: .mcp.json
+    participantId: ingredient-game.discord-agent
+    mcpServer: discord
