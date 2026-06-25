@@ -2,6 +2,9 @@
   "name": "ingredient-matching-game",
   "version": "1.0.0",
   "private": true,
+  "bin": {
+    "apm": "./bin/apm.js"
+  },
   "workspaces": [
     "frontend",
     "backend",
@@ -15,7 +18,11 @@
     "install:all": "npm install",
     "mcp": "npm run start --workspace=mcp-server",
     "test": "jest --testPathPattern=skills/__tests__ && npm run test --workspace=backend && npm run test --workspace=frontend",
-    "test:skills": "jest --testPathPattern=skills/__tests__"
+    "test:skills": "jest --testPathPattern=skills/__tests__",
+    "apm": "node ./bin/apm.js"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
