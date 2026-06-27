@@ -1,12 +1,15 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { GameProvider, useGame } from './context/GameContext';
 import { ModeSelector } from './components/ModeSelector';
 import { DifficultySelector } from './components/DifficultySelector';
 import { GameBoard } from './components/GameBoard';
+import { LanguageSwitcher } from './components/LanguageSwitcher';
 import { api } from './services/api';
 
 function SetupScreen() {
   const { state, dispatch } = useGame();
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -36,17 +39,15 @@ function SetupScreen() {
   return (
     <div className="setup-screen">
       <header className="hero">
-        <h1 className="hero-title">சுவை விளையாட்டு</h1>
-        <p className="hero-subtitle">Ingredient Matching Game</p>
-        <p className="hero-desc">
-          Master Tamil cuisine and beyond — 5 rounds, 30 seconds each.
-        </p>
+        <h1 className="hero-title">{t('hero.title')}</h1>
+        <p className="hero-subtitle">{t('hero.subtitle')}</p>
+        <p className="hero-desc">{t('hero.description')}</p>
       </header>
       <ModeSelector />
       <DifficultySelector />
       {error && <div className="error-toast">{error}</div>}
       <button className="btn-primary start-btn" onClick={startGame} disabled={loading}>
-        {loading ? 'Starting…' : '▶ Start Game · விளையாடு'}
+        {loading ? t('hero.loading') : t('hero.start')}
       </button>
     </div>
   );
@@ -54,18 +55,22 @@ function SetupScreen() {
 
 function AppInner() {
   const { state } = useGame();
+  const { t } = useTranslation();
   const inGame = state.phase !== 'setup';
   return (
     <div className="app">
       <nav className="nav">
-        <span className="nav-brand">சுவை விளையாட்டு 🍛</span>
-        {inGame && <span className="nav-score">Score: {state.score}</span>}
+        <span className="nav-brand">{t('nav.brand')}</span>
+        <div className="nav-right">
+          {inGame && <span className="nav-score">{t('nav.score', { score: state.score })}</span>}
+          <LanguageSwitcher />
+        </div>
       </nav>
       <main className="main">
         {!inGame ? <SetupScreen /> : <GameBoard />}
       </main>
       <footer className="footer">
-        <span>Tamil cuisine · APM-powered · Built with ❤️</span>
+        <span>{t('footer.text')}</span>
       </footer>
     </div>
   );
