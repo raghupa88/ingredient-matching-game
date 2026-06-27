@@ -6,16 +6,20 @@
     "dev": "ts-node src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "test": "jest"
+    "test": "jest",
+    "build:worker": "esbuild src/worker.ts --bundle --outfile=dist-worker/worker.js --platform=neutral --target=es2022 --format=esm --external:node:async_hooks --external:node:events --external:node:stream --external:node:util",
+    "deploy:worker": "wrangler deploy"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^17.4.2",
     "express": "^4.18.2",
+    "hono": "^4.12.27",
     "js-yaml": "^4.1.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260627.1",
     "@types/cors": "^2.8.17",
     "@types/dotenv": "^6.1.1",
     "@types/express": "^4.17.21",
@@ -24,11 +28,13 @@
     "@types/node": "^20.11.0",
     "@types/supertest": "^6.0.2",
     "@types/uuid": "^9.0.7",
+    "esbuild": "^0.28.1",
     "jest": "^29.7.0",
     "supertest": "^6.3.4",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "wrangler": "^4.105.0"
   },
   "jest": {
     "preset": "ts-jest",
