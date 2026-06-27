@@ -27,7 +27,7 @@ function setupReducer() {
 
   return {
     get state() { return capturedState!; },
-    dispatch: (action: Parameters<typeof capturedDispatch>[0]) => {
+    dispatch: (action: Parameters<NonNullable<typeof capturedDispatch>>[0]) => {
       act(() => { capturedDispatch!(action); });
     },
   };
