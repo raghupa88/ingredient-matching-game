@@ -19,6 +19,7 @@
     "mcp": "npm run start --workspace=mcp-server",
     "test": "jest --testPathPattern=skills/__tests__ && npm run test --workspace=backend && npm run test --workspace=frontend",
     "test:skills": "jest --testPathPattern=skills/__tests__",
+    "test:e2e": "npm run test:e2e --workspace=frontend",
     "apm": "node ./bin/apm.js"
   },
   "dependencies": {

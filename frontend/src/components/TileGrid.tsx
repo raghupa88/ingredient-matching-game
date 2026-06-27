@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Tile } from '../types/game';
 
 interface Props {
@@ -10,6 +11,7 @@ interface Props {
 export function TileGrid({ tiles, onSubmit, disabled }: Props) {
   const [flipped, setFlipped] = useState<Set<number>>(new Set());
   const [selected, setSelected] = useState<Set<number>>(new Set());
+  const { t } = useTranslation();
 
   useEffect(() => {
     setFlipped(new Set());
@@ -41,7 +43,7 @@ export function TileGrid({ tiles, onSubmit, disabled }: Props) {
             onClick={() => handleTile(i)}
             disabled={disabled}
           >
-            <span className="tile-front">?</span>
+            <span className="tile-front">{t('tile.hidden')}</span>
             <span className="tile-back">{tile.name}</span>
           </button>
         ))}
@@ -51,7 +53,7 @@ export function TileGrid({ tiles, onSubmit, disabled }: Props) {
         disabled={selected.size === 0 || disabled}
         onClick={handleSubmit}
       >
-        Submit Selection <span className="tamil">சமர்ப்பி</span>
+        {t('tile.submit')} <span className="tamil">{t('tile.submit.tamil')}</span>
       </button>
     </div>
   );

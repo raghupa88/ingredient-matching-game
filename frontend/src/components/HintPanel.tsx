@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useGame } from '../context/GameContext';
 import { api } from '../services/api';
 
 export function HintPanel() {
   const { state, dispatch } = useGame();
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
 
   async function requestHint() {
@@ -13,7 +15,7 @@ export function HintPanel() {
       const data = await api.getHint(state.sessionId);
       dispatch({ type: 'SET_HINT', hint: data.hint });
     } catch {
-      dispatch({ type: 'SET_HINT', hint: 'Think about the key flavour of this dish!' });
+      dispatch({ type: 'SET_HINT', hint: t('hint.fallback') });
     } finally {
       setLoading(false);
     }
@@ -23,7 +25,7 @@ export function HintPanel() {
     <div className="hint-panel">
       {!state.hint ? (
         <button className="btn-secondary hint-btn" onClick={requestHint} disabled={loading}>
-          {loading ? 'Getting hint…' : '💡 Hint (−10 pts)'}
+          {loading ? t('hint.loading') : t('hint.button')}
         </button>
       ) : (
         <div className="hint-box">

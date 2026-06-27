@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useGame } from '../context/GameContext';
 import { api } from '../services/api';
 
 export function CulturalContext() {
   const { state, dispatch } = useGame();
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
 
   async function loadContext() {
@@ -13,7 +15,7 @@ export function CulturalContext() {
       const data = await api.getCulturalContext(state.currentRound.dishId);
       dispatch({ type: 'SET_CULTURAL_CONTEXT', ctx: { tamilName: data.tamilName, region: data.region, funFact: data.funFact } });
     } catch {
-      dispatch({ type: 'SET_CULTURAL_CONTEXT', ctx: { tamilName: '', region: '', funFact: 'A beloved dish with rich cultural history.' } });
+      dispatch({ type: 'SET_CULTURAL_CONTEXT', ctx: { tamilName: '', region: '', funFact: t('cultural.fallback') } });
     } finally {
       setLoading(false);
     }
@@ -22,7 +24,7 @@ export function CulturalContext() {
   if (!state.culturalContext) {
     return (
       <button className="btn-secondary culture-btn" onClick={loadContext} disabled={loading}>
-        {loading ? 'Loading…' : '🏛️ Cultural Context'}
+        {loading ? t('cultural.loading') : t('cultural.button')}
       </button>
     );
   }
