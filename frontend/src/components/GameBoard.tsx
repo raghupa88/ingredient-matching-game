@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useGame } from '../context/GameContext';
 import { useTimer } from '../hooks/useTimer';
 import { api } from '../services/api';
@@ -14,6 +15,7 @@ import { Tile, TOTAL_ROUNDS } from '../types/game';
 
 export function GameBoard() {
   const { state, dispatch } = useGame();
+  const { t } = useTranslation();
   const isPlaying = state.phase === 'playing';
 
   const handleTimeUp = useCallback(async () => {
@@ -90,10 +92,10 @@ export function GameBoard() {
                 </h2>
               )}
               {state.phase === 'playing' && round.mode === 1 && (
-                <p className="instruction">Flip tiles and select all matching ingredients</p>
+                <p className="instruction">{t('game.instruction_flip')}</p>
               )}
               {state.phase === 'playing' && round.mode === 2 && (
-                <p className="instruction">Look at the ingredients below and guess the dish name</p>
+                <p className="instruction">{t('game.instruction_guess')}</p>
               )}
             </>
           )}

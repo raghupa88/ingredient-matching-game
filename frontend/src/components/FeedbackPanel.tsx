@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useGame } from '../context/GameContext';
 import { TOTAL_ROUNDS } from '../types/game';
 
@@ -5,6 +6,7 @@ interface Props { onNext: () => void; }
 
 export function FeedbackPanel({ onNext }: Props) {
   const { state } = useGame();
+  const { t } = useTranslation();
   const result = state.lastResult;
   if (!result) return null;
 
@@ -17,21 +19,23 @@ export function FeedbackPanel({ onNext }: Props) {
 
       {result.misses.length > 0 && (
         <div className="missed-list">
-          <strong>Missed:</strong> {result.misses.join(', ')}
+          <strong>{t('feedback.missed')}</strong> {result.misses.join(', ')}
         </div>
       )}
 
-      <div className="score-gained">+{result.scoreGained} pts · Total: {result.totalScore}</div>
+      <div className="score-gained">
+        {t('feedback.score', { gained: result.scoreGained, total: result.totalScore })}
+      </div>
 
       {state.currentRound && (
         <p className="dish-reveal">
-          Dish: <strong>{state.currentRound.dishName}</strong>
+          {t('feedback.dish')} <strong>{state.currentRound.dishName}</strong>
           {state.currentRound.tamilName && <span className="tamil"> ({state.currentRound.tamilName})</span>}
         </p>
       )}
 
       <button className="btn-primary next-btn" onClick={onNext}>
-        {isGameOver ? '🏆 See Leaderboard' : '▶ Next Round'}
+        {isGameOver ? t('feedback.leaderboard') : t('feedback.next')}
       </button>
     </div>
   );

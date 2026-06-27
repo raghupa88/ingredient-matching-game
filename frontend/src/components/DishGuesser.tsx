@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   ingredients: string[];
@@ -8,6 +9,7 @@ interface Props {
 
 export function DishGuesser({ ingredients, onSubmit, disabled }: Props) {
   const [guess, setGuess] = useState('');
+  const { t } = useTranslation();
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -17,26 +19,26 @@ export function DishGuesser({ ingredients, onSubmit, disabled }: Props) {
   return (
     <div className="dish-guesser">
       <div className="ingredient-list-panel">
-        <h3>Ingredients <span className="tamil">பொருட்கள்</span></h3>
+        <h3>{t('dish_guesser.heading')} <span className="tamil">{t('dish_guesser.heading.tamil')}</span></h3>
         <ul className="ingredient-list">
           {ingredients.map((ing, i) => <li key={i} className="ingredient-chip">{ing}</li>)}
         </ul>
       </div>
       <form className="guess-form" onSubmit={handleSubmit}>
         <label className="guess-label">
-          What dish is this? <span className="tamil">இது என்ன சாப்பாடு?</span>
+          {t('dish_guesser.label')} <span className="tamil">{t('dish_guesser.label.tamil')}</span>
         </label>
         <input
           type="text"
           className="guess-input"
           value={guess}
           onChange={e => setGuess(e.target.value)}
-          placeholder="Type dish name..."
+          placeholder={t('dish_guesser.placeholder')}
           disabled={disabled}
           autoFocus
         />
         <button className="btn-primary" type="submit" disabled={!guess.trim() || disabled}>
-          Guess! <span className="tamil">யூகி!</span>
+          {t('dish_guesser.submit')} <span className="tamil">{t('dish_guesser.submit.tamil')}</span>
         </button>
       </form>
     </div>

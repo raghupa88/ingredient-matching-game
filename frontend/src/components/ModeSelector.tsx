@@ -1,17 +1,19 @@
+import { useTranslation } from 'react-i18next';
 import { useGame } from '../context/GameContext';
 import { Mode } from '../types/game';
 
 export function ModeSelector() {
   const { state, dispatch } = useGame();
+  const { t } = useTranslation();
 
-  const modes: { id: Mode; title: string; tamil: string; desc: string; icon: string }[] = [
-    { id: 1, title: 'Tile Flip', tamil: 'பொருள் கண்டுபிடி', desc: 'A dish name is shown. Flip tiles to find all matching ingredients!', icon: '🎴' },
-    { id: 2, title: 'Dish Guess', tamil: 'சாப்பாடு கண்டுபிடி', desc: 'Ingredients are listed. Type the name of the dish to win!', icon: '🍽️' },
+  const modes: { id: Mode; titleKey: string; tamilKey: string; descKey: string; icon: string }[] = [
+    { id: 1, titleKey: 'mode.tile_flip.name', tamilKey: 'mode.tile_flip.tamil', descKey: 'mode.tile_flip.desc', icon: '🎴' },
+    { id: 2, titleKey: 'mode.dish_guess.name', tamilKey: 'mode.dish_guess.tamil', descKey: 'mode.dish_guess.desc', icon: '🍽️' },
   ];
 
   return (
     <div className="mode-selector">
-      <h2 className="section-title">Choose Your Mode <span className="tamil">விளையாட்டு முறை</span></h2>
+      <h2 className="section-title">{t('mode.title')}</h2>
       <div className="mode-cards">
         {modes.map(m => (
           <button
@@ -20,9 +22,9 @@ export function ModeSelector() {
             onClick={() => dispatch({ type: 'SET_MODE', mode: m.id })}
           >
             <span className="mode-icon">{m.icon}</span>
-            <strong>{m.title}</strong>
-            <span className="tamil small">{m.tamil}</span>
-            <p>{m.desc}</p>
+            <strong>{t(m.titleKey)}</strong>
+            <span className="tamil small">{t(m.tamilKey)}</span>
+            <p>{t(m.descKey)}</p>
           </button>
         ))}
       </div>

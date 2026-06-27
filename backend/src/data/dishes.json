@@ -368,5 +368,105 @@
     "funFact": "Vada Curry is a Chennai invention — crumbled chana dal vadas simmered in a spicy onion-tomato gravy, served exclusively with parotta or idiyappam.",
     "ingredients": ["chana dal vada", "onion", "tomato", "coconut", "red chilli powder", "ginger", "garlic", "curry leaves", "turmeric"],
     "decoys": ["urad dal", "tamarind", "mustard seeds", "ghee", "cardamom", "sugar", "cream", "fennel seeds"]
+  },
+  {
+    "id": "murukku",
+    "name": "Murukku",
+    "tamilName": "முறுக்கு",
+    "region": "Tamil Nadu",
+    "difficulty": "easy",
+    "funFact": "Murukku is a crunchy spiral snack made during Diwali and Krishna Jayanthi in Tamil Nadu. The name means 'twisted' in Tamil.",
+    "ingredients": ["rice flour", "urad dal flour", "butter", "cumin seeds", "sesame seeds", "salt"],
+    "decoys": ["wheat flour", "sugar", "egg", "baking soda", "coconut", "cardamom", "maida"]
+  },
+  {
+    "id": "appam",
+    "name": "Appam",
+    "tamilName": "ஆப்பம்",
+    "region": "Kerala",
+    "difficulty": "easy",
+    "funFact": "Appam is a bowl-shaped rice pancake with a soft, spongy center and crispy lacy edges, traditionally paired with coconut milk stew in Kerala.",
+    "ingredients": ["rice", "coconut milk", "yeast", "salt", "sugar", "water"],
+    "decoys": ["urad dal", "wheat flour", "egg", "butter", "baking powder", "maida", "semolina"]
+  },
+  {
+    "id": "puttu",
+    "name": "Puttu",
+    "tamilName": "புட்டு",
+    "region": "Kerala",
+    "difficulty": "easy",
+    "funFact": "Puttu is a steamed cylindrical cake of rice flour and coconut, a beloved Kerala breakfast traditionally eaten with kadala curry or banana.",
+    "ingredients": ["rice flour", "coconut", "salt", "water"],
+    "decoys": ["urad dal", "sugar", "egg", "butter", "semolina", "wheat flour", "jaggery"]
+  },
+  {
+    "id": "pesarattu",
+    "name": "Pesarattu",
+    "tamilName": "பேசரட்டு",
+    "region": "Andhra Pradesh",
+    "difficulty": "easy",
+    "funFact": "Pesarattu is a green moong dal crepe unique to Andhra Pradesh, high in protein and typically served with ginger chutney and upma.",
+    "ingredients": ["green moong dal", "rice", "ginger", "green chilli", "cumin seeds", "onion", "salt"],
+    "decoys": ["urad dal", "coconut", "tamarind", "wheat flour", "egg", "fenugreek seeds", "mustard seeds"]
+  },
+  {
+    "id": "bisi-bele-bath",
+    "name": "Bisi Bele Bath",
+    "tamilName": "பிசி பேளே பாத்",
+    "region": "Karnataka",
+    "difficulty": "medium",
+    "funFact": "Bisi Bele Bath means 'hot lentil rice dish' in Kannada. It is Karnataka's iconic one-pot comfort meal, traditionally served with ghee and pappadums.",
+    "ingredients": ["rice", "toor dal", "tamarind", "mixed vegetables", "bisi bele bath powder", "ghee", "mustard seeds", "curry leaves", "cashews"],
+    "decoys": ["coconut milk", "urad dal", "sambar powder", "sugar", "cream", "vinegar", "garam masala", "fennel seeds"]
+  },
+  {
+    "id": "pav-bhaji",
+    "name": "Pav Bhaji",
+    "tamilName": "பாவ் பாஜி",
+    "region": "Maharashtra",
+    "difficulty": "medium",
+    "funFact": "Pav Bhaji originated in Mumbai in the 1850s as a quick meal for textile mill workers — mashed vegetables cooked with butter and spices, served with soft bread rolls.",
+    "ingredients": ["potato", "mixed vegetables", "tomato", "onion", "pav bhaji masala", "butter", "pav bread", "lemon", "coriander"],
+    "decoys": ["tamarind", "coconut", "urad dal", "cream", "garam masala", "saffron", "curry leaves", "mustard seeds"]
+  },
+  {
+    "id": "chole-bhature",
+    "name": "Chole Bhature",
+    "tamilName": "சோலே பட்டூரே",
+    "region": "Punjab",
+    "difficulty": "medium",
+    "funFact": "Chole Bhature is a celebrated Punjabi street food pairing spicy chickpea curry with deep-fried fluffy bread — a Sunday breakfast favourite across North India.",
+    "ingredients": ["chickpeas", "onion", "tomato", "ginger", "garlic", "chole masala", "maida", "yogurt", "oil"],
+    "decoys": ["coconut milk", "tamarind", "urad dal", "rice flour", "curry leaves", "mustard seeds", "jaggery", "sesame seeds"]
+  },
+  {
+    "id": "kootu",
+    "name": "Kootu",
+    "tamilName": "கூட்டு",
+    "region": "Tamil Nadu",
+    "difficulty": "medium",
+    "funFact": "Kootu is a thick Tamil Nadu dish combining vegetables and lentils with a freshly ground coconut spice paste — a staple in every Tamil home's weekly menu.",
+    "ingredients": ["raw banana", "chana dal", "coconut", "cumin seeds", "pepper", "red chilli", "turmeric", "mustard seeds", "curry leaves"],
+    "decoys": ["tamarind", "tomato", "garam masala", "cream", "urad dal", "sugar", "fennel seeds", "ghee"]
+  },
+  {
+    "id": "pani-puri",
+    "name": "Pani Puri",
+    "tamilName": "பானி பூரி",
+    "region": "North India",
+    "difficulty": "medium",
+    "funFact": "Pani Puri is one of India's most beloved street foods — hollow crispy shells filled with spiced potatoes and dunked in tangy mint-tamarind water.",
+    "ingredients": ["semolina", "potato", "chickpeas", "tamarind water", "mint", "green chilli", "cumin", "chaat masala", "coriander"],
+    "decoys": ["maida", "coconut", "cream", "urad dal", "garam masala", "tomato", "onion", "mustard seeds"]
+  },
+  {
+    "id": "hyderabadi-biryani",
+    "name": "Hyderabadi Biryani",
+    "tamilName": "ஹைதராபாத் பிரியாணி",
+    "region": "Andhra Pradesh",
+    "difficulty": "hard",
+    "funFact": "Hyderabadi Dum Biryani was developed in the Nizam's royal kitchens in the 18th century. The 'dum' (slow-cooking under sealed dough) method is its defining technique.",
+    "ingredients": ["basmati rice", "chicken", "saffron", "fried onions", "yogurt", "ginger-garlic paste", "biryani masala", "mint", "ghee", "rose water", "kewra water"],
+    "decoys": ["tamarind", "coconut milk", "urad dal", "mustard seeds", "curry leaves", "tomato", "chana dal", "fenugreek seeds"]
   }
 ]
