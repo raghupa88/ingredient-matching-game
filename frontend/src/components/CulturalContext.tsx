@@ -30,12 +30,18 @@ export function CulturalContext() {
   }
 
   const { tamilName, region, funFact } = state.culturalContext;
+  // In Mode 2 during playing, hide dish-revealing info (tamilName and funFact name the dish)
+  const isMode2Playing = state.currentRound?.mode === 2 && state.phase === 'playing';
+
   return (
     <div className="cultural-context-box">
       <button className="close-btn" onClick={() => dispatch({ type: 'CLEAR_CULTURAL_CONTEXT' })}>✕</button>
-      {tamilName && <p className="tamil dish-tamil-name">{tamilName}</p>}
+      {!isMode2Playing && tamilName && <p className="tamil dish-tamil-name">{tamilName}</p>}
       <p className="region-badge">📍 {region}</p>
-      <p className="fun-fact">{funFact}</p>
+      {isMode2Playing
+        ? <p className="fun-fact">{t('cultural.mode2_hint')}</p>
+        : <p className="fun-fact">{funFact}</p>
+      }
     </div>
   );
 }
