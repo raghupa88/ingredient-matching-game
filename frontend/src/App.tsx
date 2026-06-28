@@ -84,6 +84,7 @@ function AppInner() {
       </main>
       <footer className="footer">
         <span>{t('footer.text')}</span>
+        <span className="app-version">v{__APP_VERSION__}</span>
       </footer>
     </div>
   );
