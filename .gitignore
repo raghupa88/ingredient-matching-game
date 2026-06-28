@@ -4,3 +4,9 @@ dist/
 *.log
 .DS_Store
 coverage/
+
+# Cloudflare Worker build output
+backend/dist-worker/
+
+# Playwright MCP session artifacts (screenshots, logs, YAML traces)
+.playwright-mcp/

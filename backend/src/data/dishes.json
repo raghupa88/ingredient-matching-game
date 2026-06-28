@@ -6,7 +6,7 @@
     "region": "Tamil Nadu",
     "difficulty": "easy",
     "funFact": "Idli is a steamed rice cake that has been eaten in Tamil Nadu for over 1000 years, traditionally served as breakfast with sambar and coconut chutney.",
-    "ingredients": ["rice batter", "urad dal", "salt", "water"],
+    "ingredients": ["idli rice", "urad dal", "salt", "water"],
     "decoys": ["wheat flour", "maida", "egg", "milk", "butter", "sugar", "oil"]
   },
   {
@@ -200,9 +200,9 @@
     "decoys": ["tamarind", "toor dal", "mustard seeds", "ghee", "cardamom", "sugar", "cream", "bay leaf"]
   },
   {
-    "id": "hyderabadi-biryani",
-    "name": "Hyderabadi Biryani",
-    "tamilName": "ஹைதராபாத் பிரியாணி",
+    "id": "hyderabadi-biryani-mutton",
+    "name": "Hyderabadi Mutton Biryani",
+    "tamilName": "ஹைதராபாத் மட்டன் பிரியாணி",
     "region": "Andhra Pradesh",
     "difficulty": "hard",
     "funFact": "Hyderabadi Biryani uses the dum cooking technique where meat and rice are slow-cooked together in a sealed vessel over charcoal.",
@@ -218,26 +218,6 @@
     "funFact": "Kerala Fish Curry is made with kudampuli (Gambooge) giving it a unique sour flavour unlike any other Indian fish curry.",
     "ingredients": ["fish", "kudampuli", "coconut milk", "red chilli", "ginger", "garlic", "mustard seeds", "curry leaves", "coconut oil"],
     "decoys": ["tamarind", "tomato", "toor dal", "ghee", "cardamom", "cinnamon", "bay leaf", "cream"]
-  },
-  {
-    "id": "pesarattu",
-    "name": "Pesarattu",
-    "tamilName": "பேசரட்டு",
-    "region": "Andhra Pradesh",
-    "difficulty": "easy",
-    "funFact": "Pesarattu is a green moong dal crepe from Andhra, a protein-rich breakfast served with allam (ginger) chutney.",
-    "ingredients": ["green moong dal", "rice", "ginger", "green chilli", "cumin", "onion", "salt", "oil"],
-    "decoys": ["urad dal", "tamarind", "coconut", "jaggery", "cardamom", "ghee", "toor dal", "mustard seeds"]
-  },
-  {
-    "id": "bisi-bele-bath",
-    "name": "Bisi Bele Bath",
-    "tamilName": "பிசி பேளே பாத்",
-    "region": "Karnataka",
-    "difficulty": "hard",
-    "funFact": "Bisi Bele Bath (hot lentil rice) is a one-pot comfort meal from Karnataka featuring a special spice powder blend unique to the dish.",
-    "ingredients": ["rice", "toor dal", "mixed vegetables", "tamarind", "bisi bele bath powder", "ghee", "cashews", "mustard seeds"],
-    "decoys": ["coconut milk", "urad dal", "jaggery", "cardamom", "cream", "bay leaf", "garam masala", "sugar"]
   },
   {
     "id": "butter-chicken",
@@ -330,13 +310,13 @@
     "decoys": ["cream", "cardamom", "cinnamon", "vanilla", "butter", "cocoa", "condensed milk", "honey"]
   },
   {
-    "id": "appam",
-    "name": "Appam",
-    "tamilName": "ஆப்பம்",
+    "id": "appam-tamilnadu",
+    "name": "Appam (Tamil Nadu)",
+    "tamilName": "ஆப்பம் (தமிழ்நாடு)",
     "region": "Tamil Nadu",
     "difficulty": "easy",
     "funFact": "Appam is a lacy, bowl-shaped rice pancake made from fermented batter, traditionally paired with coconut milk or vegetable stew.",
-    "ingredients": ["raw rice", "coconut", "coconut water", "yeast", "salt", "sugar"],
+    "ingredients": ["raw rice", "coconut", "coconut milk", "yeast", "salt", "sugar"],
     "decoys": ["urad dal", "maida", "wheat flour", "egg", "butter", "ghee", "milk", "tamarind"]
   },
   {
@@ -350,12 +330,12 @@
     "decoys": ["cream", "butter", "cardamom", "sugar", "vinegar", "bay leaf", "saffron", "rose water"]
   },
   {
-    "id": "tapioca-coconut",
+    "id": "kappa-biryani",
     "name": "Kappa Biryani",
     "tamilName": "கப்பா பிரியாணி",
-    "region": "Tamil Nadu",
+    "region": "Kerala",
     "difficulty": "hard",
-    "funFact": "Kappa Biryani is a unique Tamil-Kerala fusion dish of tapioca mixed with spiced beef or fish curry, popular in border belt districts.",
+    "funFact": "Kappa Biryani is a beloved Kerala dish of tapioca mixed with spiced fish curry, popular in the Tamil Nadu-Kerala border belt districts.",
     "ingredients": ["tapioca", "fish", "coconut", "red chilli", "turmeric", "mustard seeds", "curry leaves", "garlic", "shallots"],
     "decoys": ["rice", "ghee", "cardamom", "saffron", "bay leaf", "sugar", "jaggery", "cream"]
   },
@@ -368,16 +348,6 @@
     "funFact": "Vada Curry is a Chennai invention — crumbled chana dal vadas simmered in a spicy onion-tomato gravy, served exclusively with parotta or idiyappam.",
     "ingredients": ["chana dal vada", "onion", "tomato", "coconut", "red chilli powder", "ginger", "garlic", "curry leaves", "turmeric"],
     "decoys": ["urad dal", "tamarind", "mustard seeds", "ghee", "cardamom", "sugar", "cream", "fennel seeds"]
-  },
-  {
-    "id": "murukku",
-    "name": "Murukku",
-    "tamilName": "முறுக்கு",
-    "region": "Tamil Nadu",
-    "difficulty": "easy",
-    "funFact": "Murukku is a crunchy spiral snack made during Diwali and Krishna Jayanthi in Tamil Nadu. The name means 'twisted' in Tamil.",
-    "ingredients": ["rice flour", "urad dal flour", "butter", "cumin seeds", "sesame seeds", "salt"],
-    "decoys": ["wheat flour", "sugar", "egg", "baking soda", "coconut", "cardamom", "maida"]
   },
   {
     "id": "appam",
@@ -460,9 +430,9 @@
     "decoys": ["maida", "coconut", "cream", "urad dal", "garam masala", "tomato", "onion", "mustard seeds"]
   },
   {
-    "id": "hyderabadi-biryani",
-    "name": "Hyderabadi Biryani",
-    "tamilName": "ஹைதராபாத் பிரியாணி",
+    "id": "hyderabadi-biryani-chicken",
+    "name": "Hyderabadi Chicken Biryani",
+    "tamilName": "ஹைதராபாத் சிக்கன் பிரியாணி",
     "region": "Andhra Pradesh",
     "difficulty": "hard",
     "funFact": "Hyderabadi Dum Biryani was developed in the Nizam's royal kitchens in the 18th century. The 'dum' (slow-cooking under sealed dough) method is its defining technique.",

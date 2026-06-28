@@ -64,6 +64,15 @@ AI agents are defined in `apm.yml` under the `agents:` key. Each agent uses Clau
 - Tamil Nadu dishes are weighted **3×** in `dish-randomizer.js`. Preserve this when adding new dishes.
 - New dishes in `backend/src/data/dishes.json` must include `tamilName` (Tamil script), `region`, `funFact`, `ingredients[]`, and `decoys[]`.
 
+### Dish data rules
+- Every dish `id` must be **unique** — duplicates silently break the per-session history deduplication in `dish-randomizer.js`.
+- `ingredients` lists the raw constituents of the dish (e.g. `"idli rice"` + `"urad dal"`, not `"idli batter"`).
+- `decoys` are plausible-but-wrong ingredients that are mixed into the tile set in **both** game modes:
+  - Mode 1 (Tile Flip): decoys appear as clickable tiles the player must avoid.
+  - Mode 2 (Dish Guess): decoys are shown in the ingredient list alongside real ingredients, making the dish harder to identify.
+- Decoys must never overlap with `ingredients` for the same dish.
+- Decoy count shown per difficulty (controlled by `difficulty-scaler` skill): easy = 2, medium = 4, hard = 7.
+
 ### Constants — single source of truth
 | Constant | Location |
 |----------|----------|
