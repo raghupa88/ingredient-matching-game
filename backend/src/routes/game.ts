@@ -15,6 +15,7 @@ gameRouter.post('/session', (req: Request, res: Response, next: NextFunction) =>
     if (!VALID_DIFFICULTIES.has(difficulty)) return next(Object.assign(new Error('difficulty must be easy, medium, or hard'), { status: 400 }));
     const playerId = String(req.body.playerId ?? 'anonymous').slice(0, 50);
     const session = gameService.createSession(mode as 1 | 2, difficulty as gameService.Difficulty, playerId);
+    discord.notifyGameStarted(playerId, difficulty, mode).catch(() => {});
     res.json({ success: true, data: { sessionId: session.sessionId } });
   } catch (e) { next(e); }
 });
