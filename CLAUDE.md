@@ -106,6 +106,40 @@ Tamil Nadu dishes are weighted **3×** in dish-randomizer. Region field "Tamil N
 
 Sessions expire after 1 hour. Eviction runs on every new session creation.
 
+## Dish Data Schema
+
+Each entry in `backend/src/data/dishes.json` follows this structure:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | string | Unique identifier — must be unique across all entries; used by dish-randomizer to track per-session history |
+| `name` | string | English dish name shown to the player |
+| `tamilName` | string | Tamil script name shown alongside English |
+| `region` | string | Geographic origin; `"Tamil Nadu"` triggers 3× weight in dish-randomizer |
+| `difficulty` | string | `easy`, `medium`, or `hard` — controls default tile counts via `difficulty-scaler` skill |
+| `funFact` | string | Educational blurb shown on round reveal |
+| `ingredients` | string[] | The actual ingredients of the dish — what the player must identify correctly |
+| `decoys` | string[] | Plausible-but-wrong ingredients — mixed in to challenge the player in both modes |
+
+### How decoys work per mode
+
+- **Mode 1 (Tile Flip)**: `difficulty-scaler` picks a subset of correct ingredients + decoys and renders them as clickable tiles. The player selects which tiles are real ingredients.
+- **Mode 2 (Dish Guess)**: The same tile set (correct + decoy mix) is shown as a read-only ingredient list. The player types the dish name — the decoys make identification harder without revealing the answer.
+
+### Decoy count by difficulty
+
+| Difficulty | Correct tiles | Decoy tiles |
+|------------|---------------|-------------|
+| easy       | 4             | 2           |
+| medium     | 5             | 4           |
+| hard       | 5             | 7           |
+
+### Data integrity rules
+
+- Every `id` must be unique — duplicates break the per-session history deduplication in `dish-randomizer`.
+- `ingredients` must list the raw constituents actually used (e.g. `"idli rice"` and `"urad dal"`, not the pre-processed `"idli batter"`).
+- `decoys` must be culinarily plausible for the dish category but factually wrong for that specific dish. They should never overlap with `ingredients`.
+
 ## Key Constraints
 
 - Never use client-supplied scores for leaderboard — always use server-tracked session score
