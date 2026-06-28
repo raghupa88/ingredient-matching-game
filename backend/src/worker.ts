@@ -1,3 +1,4 @@
+/// <reference types="@cloudflare/workers-types" />
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { v4 as uuidv4 } from 'uuid';
@@ -126,27 +127,31 @@ class WorkerApmLoader {
 const workerApm = new WorkerApmLoader();
 
 // ---------------------------------------------------------------------------
-// In-memory session state
-// Workers are stateless across instances — sessions are lost on cold starts
+// KV-backed session and leaderboard state
+// Shared across all Worker instances via Cloudflare KV.
 // ---------------------------------------------------------------------------
 
-const sessions = new Map<string, Session>();
-const SESSION_TTL_MS = 60 * 60 * 1000;
+type LeaderboardEntry = { playerId: string; score: number; timestamp: string };
 
-function evictStaleSessions(): void {
-  const now = Date.now();
-  for (const [id, session] of sessions) {
-    if (now - session.createdAt > SESSION_TTL_MS) sessions.delete(id);
-  }
+const SESSION_TTL = 3600; // seconds — KV TTL replaces manual eviction
+
+async function getSession(sessionId: string, kv: KVNamespace): Promise<Session> {
+  if (!sessionId) throw new Error('sessionId is required');
+  const data = await kv.get<Session>(`session:${sessionId}`, 'json');
+  if (!data) throw new Error('Session not found');
+  return data;
 }
 
-const leaderboard: { playerId: string; score: number; timestamp: string }[] = [];
+async function putSession(session: Session, kv: KVNamespace): Promise<void> {
+  await kv.put(`session:${session.sessionId}`, JSON.stringify(session), { expirationTtl: SESSION_TTL });
+}
 
-function getSession(sessionId: string): Session {
-  if (!sessionId) throw new Error('sessionId is required');
-  const s = sessions.get(sessionId);
-  if (!s) throw new Error('Session not found');
-  return s;
+async function getLeaderboard(kv: KVNamespace): Promise<LeaderboardEntry[]> {
+  return (await kv.get<LeaderboardEntry[]>('leaderboard', 'json')) ?? [];
+}
+
+async function putLeaderboard(leaderboard: LeaderboardEntry[], kv: KVNamespace): Promise<void> {
+  await kv.put('leaderboard', JSON.stringify(leaderboard));
 }
 
 function shuffle<T>(arr: T[]): T[] {
@@ -192,6 +197,7 @@ interface Env {
   ALLOWED_ORIGIN?: string;
   DISCORD_WEBHOOK_URL?: string;
   NODE_ENV?: string;
+  GAME_KV: KVNamespace;
 }
 
 const app = new Hono<{ Bindings: Env }>();
@@ -213,7 +219,6 @@ app.post('/api/game/session', async (c) => {
     if (!VALID_DIFFICULTIES.has(difficulty)) return c.json({ success: false, message: 'difficulty must be easy, medium, or hard' }, 400);
     const playerId = String(body.playerId ?? 'anonymous').slice(0, 50);
 
-    evictStaleSessions();
     const session: Session = {
       sessionId: uuidv4(),
       playerId,
@@ -227,7 +232,7 @@ app.post('/api/game/session', async (c) => {
       currentRound: null,
       createdAt: Date.now(),
     };
-    sessions.set(session.sessionId, session);
+    await putSession(session, c.env.GAME_KV);
     return c.json({ success: true, data: { sessionId: session.sessionId } });
   } catch (e) {
     return c.json({ success: false, message: e instanceof Error ? e.message : 'Internal error' }, 500);
@@ -240,7 +245,7 @@ app.post('/api/game/round', async (c) => {
     const body = await c.req.json() as Record<string, unknown>;
     const { sessionId } = body;
     if (!sessionId) return c.json({ success: false, message: 'sessionId required' }, 400);
-    const session = getSession(String(sessionId));
+    const session = await getSession(String(sessionId), c.env.GAME_KV);
 
     const dish = workerApm.invokeSkill('dish-randomizer', 'pickRound',
       dishesData, session.difficulty, session.usedDishIds, session.sessionId,
@@ -265,7 +270,7 @@ app.post('/api/game/round', async (c) => {
     };
 
     session.currentRound = round;
-    sessions.set(session.sessionId, session);
+    await putSession(session, c.env.GAME_KV);
     return c.json({ success: true, data: round });
   } catch (e) {
     const status = e instanceof Error && e.message === 'Session not found' ? 404 : 500;
@@ -281,7 +286,7 @@ app.post('/api/game/validate', async (c) => {
     if (!sessionId) return c.json({ success: false, message: 'sessionId required' }, 400);
     if (answer === undefined || answer === null) return c.json({ success: false, message: 'answer required' }, 400);
 
-    const session = getSession(String(sessionId));
+    const session = await getSession(String(sessionId), c.env.GAME_KV);
     const round = session.currentRound;
     if (!round) return c.json({ success: false, message: 'No active round' }, 400);
 
@@ -321,7 +326,7 @@ app.post('/api/game/validate', async (c) => {
     session.recentScores.push(scoreGained);
     session.hintsUsed = 0;
     session.currentRound = null;
-    sessions.set(session.sessionId, session);
+    await putSession(session, c.env.GAME_KV);
 
     const webhookUrl = c.env?.DISCORD_WEBHOOK_URL;
     if (webhookUrl && isCorrect && partialRatio >= 1) {
@@ -351,14 +356,14 @@ app.post('/api/game/reset', async (c) => {
     const body = await c.req.json() as Record<string, unknown>;
     const { sessionId } = body;
     if (!sessionId) return c.json({ success: false, message: 'sessionId required' }, 400);
-    const session = getSession(String(sessionId));
+    const session = await getSession(String(sessionId), c.env.GAME_KV);
     session.score = 0;
     session.roundsPlayed = 0;
     session.recentScores = [];
     session.hintsUsed = 0;
     session.usedDishIds = [];
     session.currentRound = null;
-    sessions.set(session.sessionId, session);
+    await putSession(session, c.env.GAME_KV);
     workerApm.invokeSkill('dish-randomizer', 'resetHistory', String(sessionId));
     return c.json({ success: true, data: { message: 'Session reset' } });
   } catch (e) {
@@ -373,13 +378,21 @@ app.post('/api/game/scores', async (c) => {
     const body = await c.req.json() as Record<string, unknown>;
     const { sessionId } = body;
     if (!sessionId) return c.json({ success: false, message: 'sessionId required' }, 400);
-    const session = getSession(String(sessionId));
+    const session = await getSession(String(sessionId), c.env.GAME_KV);
     const playerId = session.playerId.slice(0, 50);
     const { score } = session;
-    leaderboard.push({ playerId, score, timestamp: new Date().toISOString() });
+    const leaderboard = await getLeaderboard(c.env.GAME_KV);
+    const existingIndex = leaderboard.findIndex(e => e.playerId === playerId);
+    if (existingIndex !== -1) {
+      if (score > leaderboard[existingIndex].score) leaderboard[existingIndex] = { playerId, score, timestamp: new Date().toISOString() };
+    } else {
+      leaderboard.push({ playerId, score, timestamp: new Date().toISOString() });
+    }
     leaderboard.sort((a, b) => b.score - a.score);
     if (leaderboard.length > 10) leaderboard.length = 10;
-    const rank = leaderboard.findIndex(e => e.playerId === playerId) + 1;
+    await putLeaderboard(leaderboard, c.env.GAME_KV);
+    const rankIndex = leaderboard.findIndex(e => e.playerId === playerId);
+    const rank = rankIndex !== -1 ? rankIndex + 1 : leaderboard.length + 1;
 
     const webhookUrl = c.env?.DISCORD_WEBHOOK_URL;
     if (webhookUrl) {
@@ -402,7 +415,8 @@ app.post('/api/game/scores', async (c) => {
 });
 
 // GET /api/game/scores
-app.get('/api/game/scores', (c) => {
+app.get('/api/game/scores', async (c) => {
+  const leaderboard = await getLeaderboard(c.env.GAME_KV);
   return c.json({ success: true, data: { leaderboard } });
 });
 
@@ -412,9 +426,9 @@ app.post('/api/hint', async (c) => {
     const body = await c.req.json() as Record<string, unknown>;
     const { sessionId } = body;
     if (!sessionId) return c.json({ success: false, message: 'sessionId required' }, 400);
-    const session = getSession(String(sessionId));
+    const session = await getSession(String(sessionId), c.env.GAME_KV);
     session.hintsUsed++;
-    sessions.set(session.sessionId, session);
+    await putSession(session, c.env.GAME_KV);
     const round = session.currentRound;
     const dishName = round?.dishName ?? 'this dish';
     const hint = `Think about what gives ${dishName} its signature flavour.`;
