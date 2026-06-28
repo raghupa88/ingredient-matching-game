@@ -63,5 +63,6 @@
   "leaderboard.play_again.tamil": "மீண்டும் விளையாடு",
   "timer.sec": "sec",
   "footer.text": "Tamil cuisine · APM-powered · Built with ❤️",
-  "lang.switch": "தமிழ்"
+  "lang.switch": "தமிழ்",
+  "error.generic": "Something went wrong. Please try again."
 }

@@ -63,5 +63,6 @@
   "leaderboard.play_again.tamil": "மீண்டும் விளையாடு",
   "timer.sec": "வி",
   "footer.text": "தமிழ் சமையல் · APM · ❤️-உடன் உருவாக்கப்பட்டது",
-  "lang.switch": "English"
+  "lang.switch": "English",
+  "error.generic": "ஏதோ தவறு நடந்தது. மீண்டும் முயற்சிக்கவும்."
 }
