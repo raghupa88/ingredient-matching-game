@@ -24,8 +24,10 @@ export function GameBoard() {
       const answer = state.currentRound.mode === 1 ? [] : '';
       const result = await api.validate(state.sessionId, answer, 0);
       dispatch({ type: 'SET_RESULT', result });
-    } catch { /* silent */ }
-  }, [state.sessionId, state.currentRound, state.phase, dispatch]);
+    } catch (e) {
+      dispatch({ type: 'SET_ERROR', error: e instanceof Error ? e.message : t('error.generic') });
+    }
+  }, [state.sessionId, state.currentRound, state.phase, dispatch, t]);
 
   const timeLeft = useTimer(30, handleTimeUp, isPlaying);
 
@@ -44,7 +46,7 @@ export function GameBoard() {
         },
       });
     } catch (e) {
-      dispatch({ type: 'SET_ERROR', error: (e as Error).message });
+      dispatch({ type: 'SET_ERROR', error: e instanceof Error ? e.message : t('error.generic') });
     }
   }
 
@@ -54,15 +56,19 @@ export function GameBoard() {
       const result = await api.validate(state.sessionId, answer, timeLeft);
       dispatch({ type: 'SET_RESULT', result });
     } catch (e) {
-      dispatch({ type: 'SET_ERROR', error: (e as Error).message });
+      dispatch({ type: 'SET_ERROR', error: e instanceof Error ? e.message : t('error.generic') });
     }
   }
 
   async function handleNext() {
     if (state.roundsPlayed >= TOTAL_ROUNDS) {
-      if (state.sessionId) {
-        const lb = await api.submitScore(state.sessionId);
-        dispatch({ type: 'SET_LEADERBOARD', leaderboard: lb.leaderboard });
+      try {
+        if (state.sessionId) {
+          const lb = await api.submitScore(state.sessionId);
+          dispatch({ type: 'SET_LEADERBOARD', leaderboard: lb.leaderboard });
+        }
+      } catch (e) {
+        dispatch({ type: 'SET_ERROR', error: e instanceof Error ? e.message : t('error.generic') });
       }
       dispatch({ type: 'SET_PHASE', phase: 'gameover' });
     } else {
