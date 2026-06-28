@@ -80,4 +80,25 @@ describe('validateDishName', () => {
     expect(result.confidence).toBeGreaterThanOrEqual(0);
     expect(result.confidence).toBeLessThanOrEqual(1);
   });
+
+  test('accepts Tamil script name as correct answer', () => {
+    const result = validateDishName('இட்லி', 'Idli', 'இட்லி');
+    expect(result.isCorrect).toBe(true);
+    expect(result.confidence).toBe(1);
+  });
+
+  test('English name still works when tamilName is provided', () => {
+    const result = validateDishName('Idli', 'Idli', 'இட்லி');
+    expect(result.isCorrect).toBe(true);
+  });
+
+  test('wrong answer still fails when tamilName is provided', () => {
+    const result = validateDishName('pizza', 'Idli', 'இட்லி');
+    expect(result.isCorrect).toBe(false);
+  });
+
+  test('tamilName parameter is optional — backward compatible', () => {
+    const result = validateDishName('Idli', 'Idli');
+    expect(result.isCorrect).toBe(true);
+  });
 });
