@@ -1,6 +1,8 @@
 {
   "nav.brand": "சுவை விளையாட்டு 🍛",
   "nav.score": "Score: {{score}}",
+  "nav.exit": "Home",
+  "nav.exit_confirm": "Exit the current game? Your progress will be lost.",
   "hero.title": "சுவை விளையாட்டு",
   "hero.subtitle": "Ingredient Matching Game",
   "hero.description": "Master Tamil cuisine and beyond — 5 rounds, 30 seconds each.",

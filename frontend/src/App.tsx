@@ -54,15 +54,28 @@ function SetupScreen() {
 }
 
 function AppInner() {
-  const { state } = useGame();
+  const { state, dispatch } = useGame();
   const { t } = useTranslation();
   const inGame = state.phase !== 'setup';
+
+  function handleExitGame() {
+    if (state.phase === 'playing' || state.phase === 'result') {
+      if (!window.confirm(t('nav.exit_confirm'))) return;
+    }
+    dispatch({ type: 'RESET' });
+  }
+
   return (
     <div className="app">
       <nav className="nav">
         <span className="nav-brand">{t('nav.brand')}</span>
         <div className="nav-right">
           {inGame && <span className="nav-score">{t('nav.score', { score: state.score })}</span>}
+          {inGame && (
+            <button className="btn-exit" onClick={handleExitGame} title={t('nav.exit')}>
+              🏠 {t('nav.exit')}
+            </button>
+          )}
           <LanguageSwitcher />
         </div>
       </nav>
