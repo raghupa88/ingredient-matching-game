@@ -7,6 +7,7 @@ export const hintRouter = Router();
 hintRouter.post('/', (req: Request, res: Response, next: NextFunction) => {
   try {
     const { sessionId } = req.body;
+    if (!sessionId) return next(Object.assign(new Error('sessionId required'), { status: 400 }));
     const { hintsUsed } = useHint(sessionId);
     const hint = generateHint(sessionId);
     res.json({ success: true, data: { hint, hintsUsed, penaltyPoints: 10 } });

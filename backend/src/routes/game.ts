@@ -58,7 +58,8 @@ gameRouter.post('/scores', async (req: Request, res: Response, next: NextFunctio
     const { sessionId } = req.body;
     if (!sessionId) return next(Object.assign(new Error('sessionId required'), { status: 400 }));
     const { leaderboard, playerId, score } = gameService.submitScore(String(sessionId));
-    const rank = leaderboard.findIndex((e: { playerId: string }) => e.playerId === playerId) + 1;
+    const rankIndex = leaderboard.findIndex((e: { playerId: string }) => e.playerId === playerId);
+    const rank = rankIndex !== -1 ? rankIndex + 1 : leaderboard.length + 1;
     // Fire-and-forget Discord notifications — never block the response
     const prevHighScore = leaderboard.length > 1 ? leaderboard[1]?.score ?? 0 : 0;
     discord.notifyScoreSubmitted(playerId, score, rank).catch(() => {});
