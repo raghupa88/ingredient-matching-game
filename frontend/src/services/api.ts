@@ -1,4 +1,5 @@
-const BASE = import.meta.env.VITE_API_URL ?? '/api';
+// Use || (not ??) so an empty-string VITE_API_URL falls back to the default
+const BASE = import.meta.env.VITE_API_URL || '/api';
 
 async function post<T>(path: string, body: unknown): Promise<T> {
   const res = await fetch(`${BASE}${path}`, {
