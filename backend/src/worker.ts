@@ -176,14 +176,16 @@ interface DiscordEmbed {
   timestamp?: string;
 }
 
-async function sendDiscordWebhook(webhookUrl: string, content: string, embeds: DiscordEmbed[]): Promise<void> {
+async function sendDiscordWebhook(webhookUrl: string, embeds: DiscordEmbed[], content?: string): Promise<void> {
   try {
+    const body: { embeds: DiscordEmbed[]; content?: string } = { embeds };
+    if (content) body.content = content;
     const res = await fetch(webhookUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ content, embeds }),
+      body: JSON.stringify(body),
     });
-    if (!res.ok) console.error(`[Discord] Webhook failed: ${res.status}`);
+    if (!res.ok) console.error(`[Discord] Webhook failed: ${res.status} ${res.statusText}`);
   } catch (err) {
     console.error('[Discord] Webhook error:', err);
   }
@@ -330,13 +332,13 @@ app.post('/api/game/validate', async (c) => {
 
     const webhookUrl = c.env?.DISCORD_WEBHOOK_URL;
     if (webhookUrl && isCorrect && partialRatio >= 1) {
-      sendDiscordWebhook(webhookUrl, '', [{
+      c.executionCtx.waitUntil(sendDiscordWebhook(webhookUrl, [{
         title: '✨ Perfect Round!',
         description: `**${session.playerId}** identified all ingredients in **${round.dishName}** with a perfect score of **${scoreGained}**!`,
         color: 0x138808,
         footer: { text: 'Ingredient Matching Game 🍛' },
         timestamp: new Date().toISOString(),
-      }]).catch(() => {});
+      }]));
     }
 
     const feedback = isCorrect ? '✓ Correct!' : partialRatio > 0.5 ? 'Close! Partial credit awarded.' : '✗ Not quite!';
@@ -397,14 +399,14 @@ app.post('/api/game/scores', async (c) => {
     const webhookUrl = c.env?.DISCORD_WEBHOOK_URL;
     if (webhookUrl) {
       const medal = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : `#${rank}`;
-      sendDiscordWebhook(webhookUrl, '', [{
+      c.executionCtx.waitUntil(sendDiscordWebhook(webhookUrl, [{
         title: `${medal} New Score — ${playerId}`,
         description: `**${score} points** submitted to the leaderboard`,
         color: rank <= 3 ? 0xFF9933 : 0x138808,
         fields: [{ name: 'Rank', value: String(rank), inline: true }, { name: 'Score', value: String(score), inline: true }],
         footer: { text: 'Ingredient Matching Game 🍛' },
         timestamp: new Date().toISOString(),
-      }]).catch(() => {});
+      }]));
     }
 
     return c.json({ success: true, data: { leaderboard } });
