@@ -181,7 +181,17 @@ export function submitScore(sessionId: string): { leaderboard: typeof leaderboar
   const playerId = session.playerId.slice(0, 50);
   const { score } = session;
   const entry = { playerId, score, timestamp: new Date().toISOString() };
-  leaderboard.push(entry);
+
+  // Keep only the highest score per player
+  const existingIndex = leaderboard.findIndex(e => e.playerId === playerId);
+  if (existingIndex !== -1) {
+    if (score > leaderboard[existingIndex].score) {
+      leaderboard[existingIndex] = entry;
+    }
+  } else {
+    leaderboard.push(entry);
+  }
+
   leaderboard.sort((a, b) => b.score - a.score);
   if (leaderboard.length > 10) leaderboard.length = 10;
   return { leaderboard, playerId, score };
