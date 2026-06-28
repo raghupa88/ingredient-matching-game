@@ -121,7 +121,7 @@ export function validateAnswer(sessionId: string, answer: string | string[], tim
     misses = result.misses;
     extras = result.extras;
   } else {
-    const result = apmLoader.invokeSkill('game-validator', 'validateDishName', String(answer), round.dishName) as {
+    const result = apmLoader.invokeSkill('game-validator', 'validateDishName', String(answer), round.dishName, round.tamilName) as {
       isCorrect: boolean; confidence: number;
     };
     isCorrect = result.isCorrect;

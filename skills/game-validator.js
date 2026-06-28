@@ -39,8 +39,16 @@ function validateIngredients(selected, correct) {
   return { isCorrect, matched, misses, extras, partialRatio };
 }
 
-function validateDishName(guess, correctName) {
-  const { confidence } = fuzzyMatch(guess, [correctName]);
+function validateDishName(guess, correctName, tamilName) {
+  const { confidence: enConf } = fuzzyMatch(guess, [correctName]);
+  let confidence = enConf;
+
+  // Also accept the Tamil script name when provided
+  if (tamilName && tamilName.trim()) {
+    const { confidence: taConf } = fuzzyMatch(guess, [tamilName]);
+    if (taConf > confidence) confidence = taConf;
+  }
+
   const isCorrect = confidence >= FUZZY_THRESHOLD;
   return { isCorrect, confidence };
 }
