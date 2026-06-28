@@ -5,3 +5,7 @@ compatibility_flags = ["nodejs_compat"]
 
 [vars]
 NODE_ENV = "production"
+
+[[kv_namespaces]]
+binding = "GAME_KV"
+id = "66b3d9dd92f741eab1c0390606a42bb0"
