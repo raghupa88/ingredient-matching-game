@@ -42,6 +42,7 @@
   "cultural.button": "🏛️ Cultural Context",
   "cultural.loading": "Loading…",
   "cultural.fallback": "A beloved dish with rich cultural history.",
+  "cultural.mode2_hint": "🌍 Geographic clue only — full context revealed after you guess!",
   "feedback.missed": "Missed:",
   "feedback.score": "+{{gained}} pts · Total: {{total}}",
   "feedback.dish": "Dish:",

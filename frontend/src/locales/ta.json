@@ -42,6 +42,7 @@
   "cultural.button": "🏛️ கலாச்சார தகவல்",
   "cultural.loading": "ஏற்றுகிறது…",
   "cultural.fallback": "வளமான கலாச்சார வரலாற்றை கொண்ட சாப்பாடு.",
+  "cultural.mode2_hint": "🌍 இடம் மட்டும் காட்டப்படுகிறது — யூகித்த பிறகு முழு தகவல் காணலாம்!",
   "feedback.missed": "தவறியவை:",
   "feedback.score": "+{{gained}} மதிப்பெண் · மொத்தம்: {{total}}",
   "feedback.dish": "சாப்பாடு:",

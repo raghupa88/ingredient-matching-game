@@ -1,4 +1,3 @@
-import { apmLoader } from './apmLoader';
 import { getSession } from './gameService';
 import dishes from '../data/dishes.json';
 
@@ -8,32 +7,61 @@ export function generateHint(sessionId: string): string {
   if (!round) return 'No active round.';
 
   const dish = dishes.find(d => d.id === round.dishId);
-  const tamilName = dish?.tamilName ?? round.dishName;
   const region = dish?.region ?? 'India';
+  const ingredients = round.correctIngredients;
 
-  // found_ingredients is what the player might have guessed; approximate as empty for now
-  const missingCount = round.correctIngredients.length;
+  if (ingredients.length === 0) {
+    return `This dish from ${region} has a distinctive flavour profile.`;
+  }
 
-  const prompt = apmLoader.renderPrompt('hint-generator', {
-    dish_name: round.dishName,
-    tamil_name: tamilName,
-    region,
-    found_ingredients: 'unknown',
-    missing_count: String(missingCount),
-  });
-
-  return prompt || `Think about what gives ${round.dishName} its signature flavour.`;
+  const ingredient = ingredients[Math.floor(Math.random() * ingredients.length)];
+  return buildIngredientClue(ingredient, region);
 }
 
-export function generateCulturalContext(dishId: string): { tamilName: string; region: string; funFact: string; prompt: string } {
+function buildIngredientClue(ingredient: string, region: string): string {
+  const lower = ingredient.toLowerCase();
+  const initial = ingredient[0].toUpperCase();
+
+  if (/dal|lentil|\bgram\b|chana/.test(lower))
+    return `A protein-rich legume is key — it starts with "${initial}".`;
+  if (/\brice\b/.test(lower))
+    return `A grain, soaked or cooked, forms part of this dish — starts with "${initial}".`;
+  if (/coconut/.test(lower))
+    return `A tropical ingredient adds richness and sweetness — starts with "${initial}".`;
+  if (/tamarind/.test(lower))
+    return `A tangy souring agent beloved in ${region} cooking — starts with "${initial}".`;
+  if (/mustard/.test(lower))
+    return `A tiny seed that crackles in hot oil — starts with "${initial}".`;
+  if (/curry leaf|curry leave/.test(lower))
+    return `Aromatic leaves from a tree native to India — starts with "${initial}".`;
+  if (/\boil\b/.test(lower))
+    return `A cooking fat is essential here — starts with "${initial}".`;
+  if (/\bsalt\b/.test(lower))
+    return `Every savoury dish needs this mineral — starts with "${initial}".`;
+  if (/\bwater\b/.test(lower))
+    return `The simplest of all ingredients — starts with "${initial}".`;
+  if (/onion|shallot/.test(lower))
+    return `An allium that builds the flavour base — starts with "${initial}".`;
+  if (/tomato/.test(lower))
+    return `A red fruit that adds tanginess — starts with "${initial}".`;
+  if (/ginger/.test(lower))
+    return `A pungent rhizome that adds warmth — starts with "${initial}".`;
+  if (/garlic/.test(lower))
+    return `A pungent bulb used across cuisines — starts with "${initial}".`;
+  if (/chilli|chili|pepper/.test(lower))
+    return `This spice brings heat to the dish — starts with "${initial}".`;
+  if (/fenugreek/.test(lower))
+    return `Slightly bitter seeds with a maple-like aroma — starts with "${initial}".`;
+  if (/cumin/.test(lower))
+    return `Earthy, warm seeds used in tempering — starts with "${initial}".`;
+  if (/turmeric/.test(lower))
+    return `A golden-yellow spice with earthy flavour — starts with "${initial}".`;
+
+  return `One key ingredient starts with "${initial}" — think about what this ${region} dish needs.`;
+}
+
+export function generateCulturalContext(dishId: string): { tamilName: string; region: string; funFact: string } {
   const dish = dishes.find(d => d.id === dishId);
   if (!dish) throw new Error('Dish not found');
-
-  const prompt = apmLoader.renderPrompt('cultural-context', {
-    dish_name: dish.name,
-    tamil_name: dish.tamilName,
-    region: dish.region,
-  });
-
-  return { tamilName: dish.tamilName, region: dish.region, funFact: dish.funFact, prompt };
+  return { tamilName: dish.tamilName, region: dish.region, funFact: dish.funFact };
 }
